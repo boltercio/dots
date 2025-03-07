@@ -38,10 +38,7 @@ ${gray}┴ ┴└─┘ ┴ └─┘└─┘└─┘ ┴ └─┘┴
 ### ---------- Instalando paquetes ---------- ###
 logo
 echo -e "${gray}Instalando paquetes necesarios...${end}"
-paquetes=(kitty neovim npm python3 python3-pip pyton3-venv \
-            zsh zsh-autosuggestions zsh-syntax-highlighting \
-            steam lsd bat git curl wget\
-         )
+paquetes=(python3 python3-pip pyton3-venv lsd bat git curl wget)
 
 function is_installed() {
     dpkg -l "$1" &>/dev/null
@@ -64,11 +61,12 @@ done
 sleep 2
 
 # mover plugins zsh / clonar zsh-history-substring-search
-echo -e "${green}[+]${gray} Instalando plugins para zsh.${end}"
+echo -e "${green}[+]${gray} Instalando zsh y sus plugins.${end}"
 if [ ! -f /usr/share/zsh/plugins ]; then 
     mkdir -p /usr/share/zsh/plugins
 fi
 
+sudo apt install zsh zsh-autosuggestions zsh-syntax-highlighting
 git clone https://github.com/zsh-users/zsh-history-substring-search.git
 sudo mv zsh-* /usr/share/zsh/plugins/
 sudo mv /usr/share/zsh-* /usr/share/zsh/plugins/
@@ -80,6 +78,7 @@ if [ ! -f $HOME/.config ]; then
     mkdir -p $HOME/.config
 fi
 
+sudo apt install neovim npm 
 cp -r dots/home/.config/kitty $HOME/.config/
 cp -r dots/home/.config/nvim $HOME/.config/
 cp -r dots/home/.config/zsh $HOME/.config/
