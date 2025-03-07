@@ -1,0 +1,69 @@
+#!/usr/bin/bash
+
+### ---------- Basicos scripts ---------- ### 
+
+green="\e[0;32m\033[1m"           # Correct message
+red="\e[0;31m\033[1m"             # Failed message
+blue="\e[0;34m\033[1m"            # Normal message
+yellow="\e[0;33m\033[1m"          # Warning message
+purple="\e[0;35m\033[1m"          # Resalto de variable
+turquoise="\e[0;36m\033[1m"
+gray="\e[0;37m\033[1m"            # Color normal
+end="\033[0m\e[0m"                # Final de color
+
+trap ctrl_c INT
+
+function ctrl_c(){
+	echo -e "${Red}[!]${gray} Exiting...${end}\n"
+	tput cnorm
+	exit 0
+}
+
+function logo () {
+# Letra "Calvin S" de https://www.freetool.dev/es/generador-de-letras-ascii
+clear
+echo -e "
+╔╗ ┌─┐┬ ┌┬┐┌─┐┬─┐╔═╗┌─┐┬─┐┬┌─┐┌┬┐┌─┐
+╠╩╗│ ││  │ ├┤ ├┬┘╚═╗│  ├┬┘│├─┘ │ └─┐
+╚═╝└─┘┴─┘┴ └─┘┴└─╚═╝└─┘┴└─┴┴   ┴ └─┘
+                        ${turquoise}By Boltercio${end}
+"
+}
+
+function CheckUser () {
+if [ $UID != 0 ]; then
+    echo -e "${red}[!]${gray} This script must be run with root permissions${end}"
+    while true; do
+        echo -e "${yellow}[*]${gray} You want execute this script with sudo command? ${turquoise}[Y/n]${end}"
+        read response
+        case $response in
+            [yY]* ) echo -e "${green}[+]${gray} Launching script with sudo permissions.${end}"
+            sudo ./$0
+            break;;
+            [nN]* ) echo -e "${red}[!]${gray} Script canceled by user.${end}"
+            break;;
+            *) echo -e "${red}[!]${gray} invalid input.${end}";;
+            esac
+        done
+        exit 0
+    fi
+}
+
+function updateSystem() {
+    echo -e "${green}[+]${gray} Actualizando base de datos de paquetes...${end}"
+    sudo apt update &>/dev/null
+    check_updates=$(apt list --upgradable 2>/dev/null | cut -d '/' -f 1 | grep -Eiv 'listando' | wc -l)
+    if [ $check_updates != 0 ]; then
+        echo -e "${yellow}[*]${gray} Hay $check_updates actualizaciones disponibles.${end}"
+        echo -e "${green}[+]${gray} Comenzando actualizacion...${end}"
+        sudo apt upgrade -y
+        echo -e "${green}[+]${gray} Limpiando cache de apt y paquetes innecesarios...${end}"
+        sudo apt clean -y
+        sudo apt autoclean -y
+        sudo apt autoremove -y
+        echo -e "${green}[+]${gray} Sistema actualizado.${end}"
+    else
+        echo -e "${green}[+]${gray} El sistema esta actualizado.${end}"
+    fi 
+
+}

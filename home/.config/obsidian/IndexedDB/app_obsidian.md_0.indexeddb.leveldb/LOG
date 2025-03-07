@@ -1,0 +1,21 @@
+2025/02/28-07:27:38.201 fb8 Reusing MANIFEST /home/boltercio/.config/obsidian/IndexedDB/app_obsidian.md_0.indexeddb.leveldb/MANIFEST-000001
+2025/02/28-07:27:38.201 fb8 Recovering log #13
+2025/02/28-07:27:38.245 fb8 Reusing old log /home/boltercio/.config/obsidian/IndexedDB/app_obsidian.md_0.indexeddb.leveldb/000013.log 
+2025/02/28-07:27:38.245 fb8 Delete type=2 #14
+2025/02/28-07:27:38.245 fb8 Delete type=2 #12
+2025/02/28-07:27:49.038 fb8 Level-0 table #18: started
+2025/02/28-07:27:49.058 fb8 Level-0 table #18: 687031 bytes OK
+2025/02/28-07:27:49.061 fb8 Delete type=0 #13
+2025/02/28-07:27:49.260 fb8 Compacting 1@1 + 1@2 files
+2025/02/28-07:27:49.290 fb8 Generated table #19@1: 14456 keys, 759712 bytes
+2025/02/28-07:27:49.290 fb8 Compacted 1@1 + 1@2 files => 759712 bytes
+2025/02/28-07:27:49.291 fb8 compacted to: files[ 0 0 1 0 0 0 0 ]
+2025/02/28-07:27:54.011 fb8 Level-0 table #21: started
+2025/02/28-07:27:54.029 fb8 Level-0 table #21: 671557 bytes OK
+2025/02/28-07:27:54.030 fb8 Delete type=2 #18
+2025/02/28-07:27:54.030 fb8 Delete type=2 #15
+2025/02/28-07:27:54.030 fb8 Delete type=0 #17
+2025/02/28-07:27:54.079 106d Compacting 1@1 + 1@2 files
+2025/02/28-07:27:54.115 106d Generated table #22@1: 14455 keys, 759633 bytes
+2025/02/28-07:27:54.115 106d Compacted 1@1 + 1@2 files => 759633 bytes
+2025/02/28-07:27:54.116 106d compacted to: files[ 0 0 1 0 0 0 0 ]

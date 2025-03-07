@@ -1,0 +1,21 @@
+2025/02/27-22:20:37.897 186c Reusing MANIFEST /home/boltercio/.config/obsidian/IndexedDB/app_obsidian.md_0.indexeddb.leveldb/MANIFEST-000001
+2025/02/27-22:20:37.898 186c Recovering log #6
+2025/02/27-22:20:37.911 186c Reusing old log /home/boltercio/.config/obsidian/IndexedDB/app_obsidian.md_0.indexeddb.leveldb/000006.log 
+2025/02/27-22:20:37.912 186c Delete type=2 #7
+2025/02/27-22:20:37.912 186c Delete type=2 #5
+2025/02/27-22:20:45.726 186c Level-0 table #11: started
+2025/02/27-22:20:45.743 186c Level-0 table #11: 1229453 bytes OK
+2025/02/27-22:20:45.744 186c Delete type=0 #6
+2025/02/27-22:20:45.802 17fd Compacting 1@1 + 1@2 files
+2025/02/27-22:20:45.824 17fd Generated table #12@1: 14459 keys, 760511 bytes
+2025/02/27-22:20:45.824 17fd Compacted 1@1 + 1@2 files => 760511 bytes
+2025/02/27-22:20:45.825 17fd compacted to: files[ 0 0 1 0 0 0 0 ]
+2025/02/27-22:20:50.174 186c Level-0 table #14: started
+2025/02/27-22:20:50.190 186c Level-0 table #14: 669241 bytes OK
+2025/02/27-22:20:50.192 186c Delete type=2 #11
+2025/02/27-22:20:50.192 186c Delete type=0 #10
+2025/02/27-22:20:50.192 186c Delete type=2 #8
+2025/02/27-22:20:50.215 17fd Compacting 1@1 + 1@2 files
+2025/02/27-22:20:50.241 17fd Generated table #15@1: 14460 keys, 759783 bytes
+2025/02/27-22:20:50.241 17fd Compacted 1@1 + 1@2 files => 759783 bytes
+2025/02/27-22:20:50.242 17fd compacted to: files[ 0 0 1 0 0 0 0 ]
