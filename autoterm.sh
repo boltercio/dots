@@ -49,7 +49,7 @@ function is_installed() {
 }
 
 for paquete in "${paquetes[@]}"; do
-    if ! is_installed "$paquete"; then
+    if [ ! is_installed "$paquete" ]; then
         sudo apt-get install -qq -y "$paquete" &>/dev/null
         if [ "$(echo $?)" != 0 ]; then
             echo -e "${red}[!]${gray} La instalacion de ${paquete} ha fallado.${end}"
@@ -64,7 +64,7 @@ done
 sleep 2
 
 # mover plugins zsh / clonar zsh-history-substring-search
-echo -e "${green}[+]${gray} Instalando plugins para zsh"
+echo -e "${green}[+]${gray} Instalando plugins para zsh.${end}"
 if [ ! -f /usr/share/zsh/plugins ]; then 
     mkdir -p /usr/share/zsh/plugins
 fi
@@ -74,7 +74,7 @@ sudo mv zsh-* /usr/share/zsh/plugins/
 sudo mv /usr/share/zsh-* /usr/share/zsh/plugins/
 
 # copiar directorios de configuracion
-echo -e "${green}[+]${gray} Copiando configuraciones"
+echo -e "${green}[+]${gray} Copiando configuraciones.${end}"
 cp dots/home/.zshrc $HOME/
 if [ ! -f $HOME/.config ]; then 
     mkdir -p $HOME/.config
@@ -84,6 +84,10 @@ cp -r dots/home/.config/kitty $HOME/.config/
 cp -r dots/home/.config/nvim $HOME/.config/
 cp -r dots/home/.config/zsh $HOME/.config/
 
-echo -e "${green}[+]${gray} Eliminando repositorio descargado"
+echo -e "${green}[+]${gray} Eliminando repositorio descargado.${end}"
+rm -rf dots
+
+# Cambiando shell por defecto
+echo -e "${green}[+]${gray} Cambiando shell por defecto.${end}" 
 # instalar paquetes descargados
 # clonar e instalar msi_ec y MControlCenter
