@@ -11,44 +11,6 @@ turquoise="\e[0;36m\033[1m"
 gray="\e[0;37m\033[1m"            # Color normal
 end="\033[0m\e[0m"                # Final de color
 
-trap ctrl_c INT
-
-function ctrl_c(){
-	echo -e "${Red}[!]${gray} Exiting...${end}\n"
-	tput cnorm
-	exit 0
-}
-
-function logo () {
-# Letra "Calvin S" de https://www.freetool.dev/es/generador-de-letras-ascii
-clear
-echo -e "
-╔╗ ┌─┐┬ ┌┬┐┌─┐┬─┐╔═╗┌─┐┬─┐┬┌─┐┌┬┐┌─┐
-╠╩╗│ ││  │ ├┤ ├┬┘╚═╗│  ├┬┘│├─┘ │ └─┐
-╚═╝└─┘┴─┘┴ └─┘┴└─╚═╝└─┘┴└─┴┴   ┴ └─┘
-                        ${turquoise}By Boltercio${end}
-"
-}
-
-function CheckUser () {
-if [ $UID != 0 ]; then
-    echo -e "${red}[!]${gray} This script must be run with root permissions${end}"
-    while true; do
-        echo -e "${yellow}[*]${gray} You want execute this script with sudo command? ${turquoise}[Y/n]${end}"
-        read response
-        case $response in
-            [yY]* ) echo -e "${green}[+]${gray} Launching script with sudo permissions.${end}"
-            sudo ./$0
-            break;;
-            [nN]* ) echo -e "${red}[!]${gray} Script canceled by user.${end}"
-            break;;
-            *) echo -e "${red}[!]${gray} invalid input.${end}";;
-            esac
-        done
-        exit 0
-    fi
-}
-
 function updateSystem() {
     echo -e "${green}[+]${gray} Actualizando base de datos de paquetes...${end}"
     sudo apt update &>/dev/null
