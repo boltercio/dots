@@ -88,5 +88,4 @@ rm -rf dots
 
 # Cambiando shell por defecto
 echo -e "${green}[+]${gray} Cambiando shell por defecto.${end}" 
-# instalar paquetes descargados
-# clonar e instalar msi_ec y MControlCenter
+chsh -s $(which zsh)
