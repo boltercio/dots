@@ -38,7 +38,7 @@ ${gray}┴ ┴└─┘ ┴ └─┘└─┘└─┘ ┴ └─┘┴
 ### ---------- Instalando paquetes ---------- ###
 logo
 echo -e "${gray}Instalando paquetes necesarios...${end}"
-paquetes=(python3 python3-pip pyton3-venv lsd bat git curl wget)
+paquetes=(zsh lsd bat curl wget qemu-guest-agent)
 
 function is_installed() {
     dpkg -l "$1" &>/dev/null
@@ -47,7 +47,7 @@ function is_installed() {
 
 for paquete in "${paquetes[@]}"; do
     if [ ! is_installed "$paquete" ]; then
-        sudo apt-get install -qq -y "$paquete" &>/dev/null
+        sudo apt-get install -qq -y "$paquete" 1>/dev/null
         if [ "$(echo $?)" != 0 ]; then
             echo -e "${red}[!]${gray} La instalacion de ${paquete} ha fallado.${end}"
         else
@@ -63,7 +63,7 @@ sleep 2
 # mover plugins zsh / clonar zsh-history-substring-search
 echo -e "${green}[+]${gray} Instalando zsh y sus plugins.${end}"
 if [ ! -f /usr/share/zsh/plugins ]; then 
-    mkdir -p /usr/share/zsh/plugins
+    sudo mkdir -p /usr/share/zsh/plugins
 fi
 
 sudo apt install zsh zsh-autosuggestions zsh-syntax-highlighting
@@ -78,10 +78,12 @@ if [ ! -f $HOME/.config ]; then
     mkdir -p $HOME/.config
 fi
 
-sudo apt install neovim npm 
-cp -r dots/home/.config/kitty $HOME/.config/
+sudo apt install npm 
 cp -r dots/home/.config/nvim $HOME/.config/
-cp -r dots/home/.config/zsh $HOME/.config/
+wget https://github.com/neovim/neovim/releases/download/nightly/nvim-linux-arm64.tar.gz
+tar -zxf nvim-linux-arm64.tar.gz
+sudo mv nvim-linux-arm64 /opt/nvim
+
 
 echo -e "${green}[+]${gray} Eliminando repositorio descargado.${end}"
 rm -rf dots
