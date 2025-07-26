@@ -73,19 +73,22 @@ sudo mv /usr/share/zsh-* /usr/share/zsh/plugins/
 
 # copiar directorios de configuracion
 echo -e "${green}[+]${gray} Copiando configuraciones.${end}"
-cp dots/home/.zshrc $HOME/
+cp home/.zshrc $HOME/
 if [ ! -f $HOME/.config ]; then 
     mkdir -p $HOME/.config
 fi
 
+cp -r home/.config/zsh $HOME/.config/
+
 sudo apt install npm 
-cp -r dots/home/.config/nvim $HOME/.config/
+cp -r home/.config/nvim $HOME/.config/
 wget https://github.com/neovim/neovim/releases/download/nightly/nvim-linux-arm64.tar.gz
 tar -zxf nvim-linux-arm64.tar.gz
 sudo mv nvim-linux-arm64 /opt/nvim
-
+rm -rf nvim-linux-arm64.tar.gz
 
 echo -e "${green}[+]${gray} Eliminando repositorio descargado.${end}"
+cd $HOME
 rm -rf dots
 
 # Cambiando shell por defecto
