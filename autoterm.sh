@@ -38,7 +38,7 @@ ${gray}┴ ┴└─┘ ┴ └─┘└─┘└─┘ ┴ └─┘┴
 ### ---------- Comprobando directorio de trabajo ---------- ###
 local_dir=$(pwd)
 if [ "local_dir" != "$HOME/dots" ]; then
-    echo -e "${red}[!]${gray} Debes ejecutar este script desde el directorio $HOME/dots${end}"
+    echo -e "${red}[!]${gray} Debes ejecutar este script desde el directorio $local_dir${end}"
     exit 1
 fi
 
