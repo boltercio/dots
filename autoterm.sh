@@ -41,7 +41,7 @@ echo -e "${gray}Instalando paquetes necesarios...${end}"
 paquetes=(zsh lsd bat curl wget qemu-guest-agent)
 
 function is_installed() {
-    dpkg -l "$1" &>/dev/null
+    dpkg -l "$1" | grep "ii" &>/dev/null
     return $?
 }
 

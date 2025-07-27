@@ -142,4 +142,4 @@ alias dir='lsd --group-dirs=first -l'
 #  ┌─┐┬ ┬┌┬┐┌─┐  ┌─┐┌┬┐┌─┐┬─┐┌┬┐
 #  ├─┤│ │ │ │ │  └─┐ │ ├─┤├┬┘ │
 #  ┴ ┴└─┘ ┴ └─┘  └─┘ ┴ ┴ ┴┴└─ ┴
-logo # logo function from zshfunctions
+#logo # logo function from zshfunctions
