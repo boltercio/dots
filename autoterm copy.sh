@@ -53,7 +53,7 @@ function is_installed() {
 }
 
 for paquete in "${paquetes[@]}"; do
-    if [ ! $(dpkg -l "$paquete" | grep "ii") ]; then
+    if [ ! is_installed "$paquete" ]; then
         sudo apt-get install -qq -y "$paquete" 1>/dev/null
         if [ "$(echo $?)" != 0 ]; then
             echo -e "${red}[!]${gray} La instalacion de ${paquete} ha fallado.${end}"
