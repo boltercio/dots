@@ -35,6 +35,13 @@ ${gray}┴ ┴└─┘ ┴ └─┘└─┘└─┘ ┴ └─┘┴
 "
 }
 
+### ---------- Comprobando directorio de trabajo ---------- ###
+local_dir=$(pwd)
+if [ "local_dir" != "$HOME/dots" ]; then
+    echo -e "${red}[!]${gray} Debes ejecutar este script desde el directorio $HOME/dots.${end}"
+    exit 1
+fi
+
 ### ---------- Instalando paquetes ---------- ###
 logo
 echo -e "${gray}Instalando paquetes necesarios...${end}"
@@ -66,7 +73,7 @@ if [ ! -f /usr/share/zsh/plugins ]; then
     sudo mkdir -p /usr/share/zsh/plugins
 fi
 
-sudo apt install zsh zsh-autosuggestions zsh-syntax-highlighting
+sudo apt install zsh zsh-autosuggestions zsh-syntax-highlighting -y
 git clone https://github.com/zsh-users/zsh-history-substring-search.git
 sudo mv zsh-* /usr/share/zsh/plugins/
 sudo mv /usr/share/zsh-* /usr/share/zsh/plugins/
