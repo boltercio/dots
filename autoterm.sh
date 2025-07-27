@@ -47,14 +47,9 @@ logo
 echo -e "${gray}Instalando paquetes necesarios...${end}"
 paquetes=(zsh lsd bat curl wget qemu-guest-agent)
 
-function is_installed() {
-    dpkg -l "$1" | grep "ii" &>/dev/null
-    return $?
-}
-
 for paquete in "${paquetes[@]}"; do
     if [ ! $(dpkg -l "$paquete" | grep "ii" &>/dev/null) ]; then
-        sudo apt-get install -qq -y "$paquete" 1>/dev/null
+        sudo apt-get install -qq -y "$paquete" &>/dev/null
         if [ "$(echo $?)" != 0 ]; then
             echo -e "${red}[!]${gray} La instalacion de ${paquete} ha fallado.${end}"
         else
@@ -87,11 +82,12 @@ fi
 
 cp -r home/.config/zsh $HOME/.config/
 
-sudo apt install npm 
+sudo apt install npm -y
 cp -r home/.config/nvim $HOME/.config/
 wget https://github.com/neovim/neovim/releases/download/nightly/nvim-linux-arm64.tar.gz
 tar -zxf nvim-linux-arm64.tar.gz
 sudo mv nvim-linux-arm64 /opt/nvim
+sudo ln -s /opt/nvim/bin/nvim /usr/bin/nvim
 rm -rf nvim-linux-arm64.tar.gz
 
 echo -e "${green}[+]${gray} Eliminando repositorio descargado.${end}"
