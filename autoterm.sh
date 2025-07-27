@@ -48,7 +48,7 @@ echo -e "${gray}Instalando paquetes necesarios...${end}"
 paquetes=(zsh lsd bat curl wget qemu-guest-agent)
 
 for paquete in "${paquetes[@]}"; do
-    if [ ! $(dpkg -l "$paquete" | grep "ii" &>/dev/null) ]; then
+    if [ ! $(dpkg -l "$paquete" &>/dev/null | grep "ii") ]; then
         sudo apt-get install -qq -y "$paquete" &>/dev/null
         if [ "$(echo $?)" != 0 ]; then
             echo -e "${red}[!]${gray} La instalacion de ${paquete} ha fallado.${end}"
