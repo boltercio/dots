@@ -14,7 +14,7 @@ end="\033[0m\e[0m"                # Final de color
 function updateSystem() {
     echo -e "${green}[+]${gray} Actualizando base de datos de paquetes...${end}"
     sudo apt update &>/dev/null
-    check_updates=$(apt list --upgradable 2>/dev/null | cut -d '/' -f 1 | grep -Eiv 'listando' | wc -l)
+    check_updates=$(apt list --upgradable 2>/dev/null | cut -d '/' -f 1 | grep -Eiv 'listando|listing' | wc -l)
     if [ $check_updates != 0 ]; then
         echo -e "${yellow}[*]${gray} Hay $check_updates actualizaciones disponibles.${end}"
         echo -e "${green}[+]${gray} Comenzando actualizacion...${end}"
