@@ -50,7 +50,7 @@ feh rofi xclip xsel bspwm sxhkd polybar picom kitty \
 unzip fzf )
 
 for paquete in "${paquetes[@]}"; do
-    consulta=$(dpkg -l $paquete | grep "ii" | awk '{print $2}')
+    consulta=$(dpkg -l $paquete &>/dev/null | grep "ii" | awk '{print $2}')
     if [ "$consulta" != "$paquete" ]; then
         sudo apt-get install -qq -y "$paquete" &>/dev/null
         if [ "$(echo $?)" != 0 ]; then
@@ -90,7 +90,7 @@ cp -r home/.local/share/fonts/* $HOME/.local/share/fonts/
 
 sudo apt install --no-install-recommends npm -y &>/dev/null
 cp -r home/.config/nvim $HOME/.config/
-wget https://github.com/neovim/neovim/releases/download/nightly/nvim-linux-arm64.tar.gz
+wget https://github.com/neovim/neovim/releases/download/nightly/nvim-linux-arm64.tar.gz &>/dev/null
 tar -zxf nvim-linux-arm64.tar.gz
 sudo mv nvim-linux-arm64 /opt/nvim
 sudo ln -s /opt/nvim/bin/nvim /usr/bin/nvim
@@ -102,7 +102,7 @@ sudo apt install --no-install-recommends lightdm -qq -y &>/dev/null
 sudo sed -i s/#autologin-user=/autologin-user=$USER/g /etc/lightdm/lightdm.conf
 
 # Configurando tema de grub
-wget -P /tmp https://github.com/shvchk/fallout-grub-theme/raw/master/install.sh
+wget -P /tmp https://github.com/shvchk/fallout-grub-theme/raw/master/install.sh &>/dev/null
 bash /tmp/install.sh --lang Spanish
 
 # Cambiando shell por defecto
