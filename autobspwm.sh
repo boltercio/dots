@@ -96,10 +96,11 @@ sudo mv nvim-linux-arm64 /opt/nvim
 sudo ln -s /opt/nvim/bin/nvim /usr/bin/nvim
 rm -rf nvim-linux-arm64.tar.gz
 
-# Instalando display manager sddm
+# Instalando display manager lightdm
 echo -e "${green}[+]${gray} Instalando y configurando lightDM."
 sudo apt install --no-install-recommends lightdm -qq -y &>/dev/null
 sudo sed -i s/#autologin-user=/autologin-user=$USER/g /etc/lightdm/lightdm.conf
+sudo systemctl enable lightdm
 
 # Configurando tema de grub
 wget -P /tmp https://github.com/shvchk/fallout-grub-theme/raw/master/install.sh &>/dev/null
