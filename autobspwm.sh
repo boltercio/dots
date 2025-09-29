@@ -44,10 +44,14 @@ fi
 
 ### ---------- Instalando paquetes ---------- ###
 logo
+echo -e "${green}[+]${gray} actualizando base de datos de paquetes APT${end}"
+sudo apt update
+sudo apt full-upgrade
+
 echo -e "${gray}Instalando paquetes necesarios...${end}"
 paquetes=(zsh lsd bat curl wget acpi open-vm-tools open-vm-tools-desktop \
 feh rofi xclip xsel bspwm sxhkd polybar picom kitty \
-unzip fzf )
+unzip fzf dbus-x11 x11-xserver-utils)
 
 for paquete in "${paquetes[@]}"; do
     consulta=$(dpkg -l $paquete | grep "ii" | awk '{print $2}')
@@ -70,8 +74,8 @@ echo -e "${green}[+]${gray} Instalando zsh y sus plugins.${end}"
 if [ ! -f /usr/share/zsh/plugins ]; then 
     sudo mkdir -p /usr/share/zsh/plugins
 fi
-sudo apt install zsh zsh-autosuggestions zsh-syntax-highlighting -y
-git clone https://github.com/zsh-users/zsh-history-substring-search.git
+sudo apt install zsh zsh-autosuggestions zsh-syntax-highlighting -qq -y &>/dev/null
+git clone https://github.com/zsh-users/zsh-history-substring-search.git &>/dev/null
 sudo mv zsh-history-substring-search /usr/share/zsh/plugins/zsh-history-substring-search
 sudo mv /usr/share/zsh-* /usr/share/zsh/plugins/
 
@@ -88,13 +92,28 @@ if [ ! -d $HOME/.local/share/fonts ]; then
 fi
 cp -r home/.local/share/fonts/* $HOME/.local/share/fonts/
 
-sudo apt install --no-install-recommends npm -y
+sudo apt install --no-install-recommends npm -y &>/dev/null
 cp -r home/.config/nvim $HOME/.config/
 wget https://github.com/neovim/neovim/releases/download/nightly/nvim-linux-arm64.tar.gz
 tar -zxf nvim-linux-arm64.tar.gz
 sudo mv nvim-linux-arm64 /opt/nvim
 sudo ln -s /opt/nvim/bin/nvim /usr/bin/nvim
 rm -rf nvim-linux-arm64.tar.gz
+
+# Instalando display manager sddm
+echo -e "${green}[+]${gray} Instalando y configurando sddm."
+sudo apt install --no-install-recommends sddm -qq -y &>/dev/null
+sudo apt install qml-module-qtquick-layouts qml-module-qtquick-controls2 qml-module-qtquick-templates2 qml-module-qtgraphicaleffects kde-config-sddm -qq -y &>/dev/null
+if [ ! -d "/usr/share/sddm/themes" ]; then
+    mkdir /usr/share/sddm/themes
+fi
+sudo cp -r themes/sddm/* /usr/share/sddm/themes
+sudo cp misc/sddm.conf /etc/
+sudo systemctl enable sddm
+
+# Configurando tema de grub
+wget -P /tmp https://github.com/shvchk/fallout-grub-theme/raw/master/install.sh
+bash /tmp/install.sh --lang Spanish
 
 # Cambiando shell por defecto
 echo -e "${green}[+]${gray} Cambiando shell por defecto.${end}" 
