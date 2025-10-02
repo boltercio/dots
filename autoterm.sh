@@ -68,8 +68,8 @@ if [ ! -f /usr/share/zsh/plugins ]; then
     sudo mkdir -p /usr/share/zsh/plugins
 fi
 
-sudo apt install zsh zsh-autosuggestions zsh-syntax-highlighting -y
-git clone https://github.com/zsh-users/zsh-history-substring-search.git
+sudo apt install zsh zsh-autosuggestions zsh-syntax-highlighting -y &>/dev/null
+git clone https://github.com/zsh-users/zsh-history-substring-search.git &>/dev/null
 sudo mv zsh-* /usr/share/zsh/plugins/
 sudo mv /usr/share/zsh-* /usr/share/zsh/plugins/
 
@@ -83,9 +83,9 @@ fi
 cp -r home/.config/zsh $HOME/.config/
 
 
-sudo apt install npm -y
+sudo apt install npm -y &>/dev/null
 cp -r home/.config/nvim $HOME/.config/
-wget https://github.com/neovim/neovim/releases/download/nightly/nvim-linux-arm64.tar.gz
+wget https://github.com/neovim/neovim/releases/download/nightly/nvim-linux-arm64.tar.gz &>/dev/null
 tar -zxf nvim-linux-arm64.tar.gz
 sudo mv nvim-linux-arm64 /opt/nvim
 sudo ln -s /opt/nvim/bin/nvim /usr/bin/nvim
