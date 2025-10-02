@@ -82,6 +82,7 @@ fi
 
 cp -r home/.config/zsh $HOME/.config/
 
+
 sudo apt install npm -y
 cp -r home/.config/nvim $HOME/.config/
 wget https://github.com/neovim/neovim/releases/download/nightly/nvim-linux-arm64.tar.gz

@@ -81,7 +81,7 @@ cp home/.zshrc $HOME/
 if [ ! -d $HOME/.config ]; then 
     mkdir -p $HOME/.config
 fi
-cp -r home/.config/zsh $HOME/.config/
+cp -r home/.config/* $HOME/.config/
 
 if [ ! -d $HOME/.local/share/fonts ]; then
     mkdir -p $HOME/.local/share/fonts
