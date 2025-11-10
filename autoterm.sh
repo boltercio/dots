@@ -38,27 +38,31 @@ ${gray}┴ ┴└─┘ ┴ └─┘└─┘└─┘ ┴ └─┘┴
 ### ---------- Comprobando directorio de trabajo ---------- ###
 local_dir=$(pwd)
 if [ "$local_dir" != "$HOME/dots" ]; then
-    echo -e "${red}[!]${gray} Debes ejecutar este script desde el directorio $local_dir${end}"
+    echo -e "${red}[!]${gray} Debes ejecutar este script desde el directorio $HOME/dots${end}"
     exit 1
 fi
 
 ### ---------- Instalando paquetes ---------- ###
+function package_install() {
+    paquete=$1
+    if dpkg -s $paquete &>/dev/null; then
+        echo -e "${green}[+]${gray} El paquete ${purple}$paquete${gray} ya está instalado.${end}"
+    else
+        echo -e "${green}[+]${gray} Instalando paquete ${purple}$paquete${gray}...${end}"
+        sudo apt install $paquete -y &>/dev/null
+        if [ $? -eq 0 ]; then
+            echo -e "${green}[+]${gray} Paquete ${purple}$paquete${gray} instalado correctamente.${end}"
+        else
+            echo -e "${red}[!]${gray} Error al instalar el paquete ${purple}$paquete${end}"
+        fi
+    fi
+}
 logo
 echo -e "${gray}Instalando paquetes necesarios...${end}"
-paquetes=(zsh lsd bat curl wget qemu-guest-agent)
+paquetes=(zsh lsd bat curl wget qemu-guest-agent open-vm-tools)
 
 for paquete in "${paquetes[@]}"; do
-    if [ ! $(dpkg -l "$paquete" &>/dev/null | grep "ii") ]; then
-        sudo apt-get install -qq -y "$paquete" &>/dev/null
-        if [ "$(echo $?)" != 0 ]; then
-            echo -e "${red}[!]${gray} La instalacion de ${paquete} ha fallado.${end}"
-        else
-            echo -e "${blue}[*] ${gray}$paquete se ha instalado correctamente.${end}"
-        fi
-    else
-        echo -e "${green}[+] ${gray}$paquete ya esta instalado en tu sistema.${end}"
-        sleep 0.5
-    fi
+    package_install $paquete
 done
 sleep 2
 
