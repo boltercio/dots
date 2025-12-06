@@ -46,8 +46,8 @@ fi
 logo
 echo -e "${gray}Instalando paquetes necesarios...${end}"
 paquetes=(zsh lsd bat curl wget acpi open-vm-tools open-vm-tools-desktop \
-feh rofi xclip xsel bspwm sxhkd polybar picom kitty \
-unzip fzf )
+feh rofi xclip xsel bspwm sxhkd polybar picom kitty yazi \
+unzip fzf xsel imagenmagick acpi locate build-essential)
 
 for paquete in "${paquetes[@]}"; do
     consulta=$(dpkg -l $paquete &>/dev/null | grep "ii" | awk '{print $2}')
@@ -87,6 +87,7 @@ if [ ! -d $HOME/.local/share/fonts ]; then
     mkdir -p $HOME/.local/share/fonts
 fi
 cp -r home/.local/share/fonts/* $HOME/.local/share/fonts/
+fc-cache -fv &>/dev/null
 
 sudo apt install --no-install-recommends npm -y &>/dev/null
 cp -r home/.config/nvim $HOME/.config/
