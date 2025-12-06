@@ -44,6 +44,10 @@ fi
 
 ### ---------- Instalando paquetes ---------- ###
 logo
+echo -e "${green}[+]${gray} Actualizando repositorios...${end}"
+sudo apt update &>/dev/null
+sudo apt full-upgrade -qq -y &>/dev/null
+
 echo -e "${gray}Instalando paquetes necesarios...${end}"
 paquetes=(zsh lsd bat curl wget acpi open-vm-tools open-vm-tools-desktop \
 feh rofi xclip xsel bspwm sxhkd polybar picom kitty yazi \
