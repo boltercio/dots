@@ -49,9 +49,9 @@ sudo apt update &>/dev/null
 sudo apt full-upgrade -qq -y &>/dev/null
 
 echo -e "${green}[INFO]${gray} Instalando paquetes necesarios...${end}"
-paquetes=(zsh lsd bat curl wget acpi open-vm-tools open-vm-tools-desktop \
-feh rofi xclip xsel bspwm sxhkd polybar picom kitty yazi \
-unzip fzf xsel imagenmagick acpi locate build-essential \
+paquetes=(zsh lsd bat curl wget acpi open-vm-tools open-vm-tools-desktop build-essential \
+feh rofi xclip xsel bspwm sxhkd polybar picom kitty unzip xsel locate acpi \
+ffmpeg 7zip jq poppler-utils fd-find ripgrep fzf zoxide imagemagick \
 xorg)
 
 instalar_paquete() { 
@@ -99,6 +99,14 @@ fi
 cp -r home/.local/share/fonts/* $HOME/.local/share/fonts/
 fc-cache -fv &>/dev/null
 
+# Instalando yazi 
+echo -e "${green}[+]${gray} Instalando Yazi.${end}"
+wget https://github.com/sxyazi/yazi/releases/download/nightly/yazi-x86_64-unknown-linux-gnu.deb &>/dev/null
+sudo dpkg -i yazi-x86_64-unknown-linux-gnu.deb &>/dev/null
+rm -rf yazi-x86_64-unknown-linux-gnu.deb
+
+# Instalando npm y neovim
+echo -e "${green}[+]${gray} Instalando Neovim.${end}"
 sudo apt install --no-install-recommends npm -y &>/dev/null
 cp -r home/.config/nvim $HOME/.config/
 wget https://github.com/neovim/neovim/releases/download/nightly/nvim-linux-arm64.tar.gz &>/dev/null
