@@ -101,9 +101,10 @@ fc-cache -fv &>/dev/null
 
 # Instalando yazi 
 echo -e "${green}[+]${gray} Instalando Yazi.${end}"
-wget https://github.com/sxyazi/yazi/releases/download/nightly/yazi-x86_64-unknown-linux-gnu.deb 
-sudo dpkg -i yazi-x86_64-unknown-linux-gnu.deb 
-rm -rf yazi-x86_64-unknown-linux-gnu.deb
+arquitectura=$(uname -m)
+wget https://github.com/sxyazi/yazi/releases/download/nightly/yazi-$arquitectura-unknown-linux-gnu.deb 
+sudo dpkg -i yazi-$arquitectura-unknown-linux-gnu.deb 
+rm -rf yazi-$arquitectura-unknown-linux-gnu.deb
 
 # Instalando npm y neovim
 echo -e "${green}[+]${gray} Instalando Neovim.${end}"
