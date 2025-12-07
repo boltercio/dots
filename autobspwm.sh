@@ -124,7 +124,7 @@ rm -rf nvim-linux-arm64.tar.gz
 
 # Instalando display manager lightdm
 echo -e "${green}[+]${gray} Instalando y configurando lightDM."
-sudo apt install --no-install-recommends lightdm -qq -y &>/dev/null
+sudo apt install lightdm -qq -y &>/dev/null
 sudo sed -i s/#autologin-user=/autologin-user=$USER/g /etc/lightdm/lightdm.conf
 sudo systemctl enable lightdm
 
