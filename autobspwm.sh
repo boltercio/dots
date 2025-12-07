@@ -96,19 +96,13 @@ cp -r home/.config/* $HOME/.config/
 # Instalando fuentes
 echo -e "${green}[+]${gray} Instalando fuentes.${end}"
 mkdir -p /tmp/fonts
-wget -q --show-progress https://github.com/ryanoasis/nerd-fonts/releases/download/v3.0.2/Hack.zip -O /tmp/fonts/Hack.zip
+wget -q --show-progress https://github.com/ryanoasis/nerd-fonts/releases/download/v3.0.2/Hack.zip -O /tmp/fonts/Hack.zip &>/dev/null
 unzip -q /tmp/fonts/Hack.zip -d /tmp/fonts
-wget -q --show-progress https://github.com/ryanoasis/nerd-fonts/releases/download/v3.0.2/JetBrainsMono.zip -O /tmp/fonts/JetBrainsMono.zip
+wget -q --show-progress https://github.com/ryanoasis/nerd-fonts/releases/download/v3.0.2/JetBrainsMono.zip -O /tmp/fonts/JetBrainsMono.zip &>/dev/null
 unzip -q /tmp/fonts/JetBrainsMono.zip -d /tmp/fonts
 mkdir -p ~/.local/share/fonts
-mv /tmp/fonts/*.ttf ~/.local/share/fonts/
+mv -f /tmp/fonts/*.ttf ~/.local/share/fonts/
 rm -rf /tmp/fonts
-fc-cache -fv &>/dev/null
-
-if [ ! -d $HOME/.local/share/fonts ]; then
-    mkdir -p $HOME/.local/share/fonts
-fi
-cp -r home/.local/share/fonts/* $HOME/.local/share/fonts/
 fc-cache -fv &>/dev/null
 
 # Instalando yazi 
