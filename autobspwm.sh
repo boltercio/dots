@@ -54,27 +54,6 @@ feh rofi xclip xsel bspwm sxhkd polybar picom kitty yazi \
 unzip fzf xsel imagenmagick acpi locate build-essential \
 xorg)
 
-show_progress() {
-    local pid=$1
-    local package_name=$2
-    local spin_chars=("●○○○○○○○○○" "○●○○○○○○○○" "○○●○○○○○○○" "○○○●○○○○○○" "○○○○●○○○○" \
-                      "○○○○○●○○○○" "○○○○○○●○○○" "○○○○○○○●○○" "○○○○○○○○●○" "○○○○○○○○○●") 
-    local i=0
-
-    tput civis 
-    printf "\r${INFO} Instalando ${YELLOW}%s${RESET} ..." "$package_name"
-
-    while ps -p $pid &> /dev/null; do
-        printf "\r${INFO} Instalando ${YELLOW}%s${RESET} %s" "$package_name" "${spin_chars[i]}"
-        i=$(( (i + 1) % 10 ))  
-        sleep 0.3  
-    done
-
-    printf "\r${INFO} Instalando ${YELLOW}%s${RESET} ... Completado!%-20s \n\n" "$package_name" ""
-    tput cnorm  
-}
-
-
 instalar_paquete() { 
     paquete=$1 
     consulta=$(dpkg -l | grep -q -w "$paquete")
@@ -82,8 +61,6 @@ instalar_paquete() {
         echo -e "${green}[+] ${gray}$paquete ya esta instalado en tu sistema.${end}"
     else
         sudo apt-get install -qq -y "$paquete" &>/dev/null
-        pid=$!
-        show_progress $pid $paquete
         if [ "$(echo $?)" != 0 ]; then
             echo -e "${red}[!]${gray} La instalacion de ${paquete} ha fallado.${end}"
         else
