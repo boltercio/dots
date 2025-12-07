@@ -52,7 +52,7 @@ echo -e "${green}[INFO]${gray} Instalando paquetes necesarios...${end}"
 paquetes=(zsh lsd bat curl wget acpi open-vm-tools open-vm-tools-desktop build-essential \
 feh rofi xclip xsel bspwm sxhkd polybar picom kitty unzip xsel locate acpi \
 ffmpeg 7zip jq poppler-utils fd-find ripgrep fzf zoxide imagemagick \
-xorg fastfech fonts-font-awesome fonts-firacode \)
+xorg fastfech fonts-font-awesome fonts-firacode)
 
 instalar_paquete() { 
     paquete=$1 
