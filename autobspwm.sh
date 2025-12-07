@@ -129,6 +129,14 @@ sudo apt install lightdm -qq -y &>/dev/null
 sudo systemctl enable lightdm
 
 # Configurando tema de grub
+if [ -d /boot/grub/themes/kali ]; then
+    sudo rm -rf /boot/grub/themes/kali
+fi
+if [ -f  /usr/share/images/desktop-base/desktop-grub.png  ]; then
+    sudo rm -f /usr/share/images/desktop-base/desktop-grub.png
+fi
+
+echo -e "${green}[+]${gray} Configurando tema de GRUB.${end}"
 wget -P /tmp https://github.com/shvchk/fallout-grub-theme/raw/master/install.sh &>/dev/null
 bash /tmp/install.sh --lang Spanish
 
