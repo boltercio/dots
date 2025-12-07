@@ -52,7 +52,7 @@ echo -e "${green}[INFO]${gray} Instalando paquetes necesarios...${end}"
 paquetes=(zsh lsd bat curl wget acpi open-vm-tools open-vm-tools-desktop build-essential \
 feh rofi xclip xsel bspwm sxhkd polybar picom kitty unzip xsel locate acpi \
 ffmpeg 7zip jq poppler-utils fd-find ripgrep fzf zoxide imagemagick \
-xorg fastfetch fonts-font-awesome font-hack fonts-firacode)
+xorg fastfetch wmname fonts-font-awesome font-hack fonts-firacode)
 
 instalar_paquete() { 
     paquete=$1 
@@ -92,6 +92,18 @@ if [ ! -d $HOME/.config ]; then
     mkdir -p $HOME/.config
 fi
 cp -r home/.config/* $HOME/.config/
+
+# Instalando fuentes
+echo -e "${green}[+]${gray} Instalando fuentes.${end}"
+mkdir -p /tmp/fonts
+wget -q --show-progress https://github.com/ryanoasis/nerd-fonts/releases/download/v3.0.2/Hack.zip -O /tmp/fonts/Hack.zip
+unzip -q /tmp/fonts/Hack.zip -d /tmp/fonts
+wget -q --show-progress https://github.com/ryanoasis/nerd-fonts/releases/download/v3.0.2/JetBrainsMono.zip -O /tmp/fonts/JetBrainsMono.zip
+unzip -q /tmp/fonts/JetBrainsMono.zip -d /tmp/fonts
+mkdir -p ~/.local/share/fonts
+mv /tmp/fonts/*.ttf ~/.local/share/fonts/
+rm -rf /tmp/fonts
+fc-cache -fv &>/dev/null
 
 if [ ! -d $HOME/.local/share/fonts ]; then
     mkdir -p $HOME/.local/share/fonts
