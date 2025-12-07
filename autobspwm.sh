@@ -51,11 +51,13 @@ sudo apt full-upgrade -qq -y &>/dev/null
 echo -e "${gray}Instalando paquetes necesarios...${end}"
 paquetes=(zsh lsd bat curl wget acpi open-vm-tools open-vm-tools-desktop \
 feh rofi xclip xsel bspwm sxhkd polybar picom kitty yazi \
-unzip fzf xsel imagenmagick acpi locate build-essential)
+unzip fzf xsel imagenmagick acpi locate build-essential \
+xorg)
 
-for paquete in "${paquetes[@]}"; do
-    consulta=$(dpkg-query -s $paquete &>/dev/null)
-    if [ ! "$consulta" ]; then
+instalar_paquete() { 
+    paquete=$1 
+    consulta=$(dpkg -l | grep -q -w "$paquete")
+    if [ "$consulta" ]; then
         sudo apt-get install -qq -y "$paquete" &>/dev/null
         if [ "$(echo $?)" != 0 ]; then
             echo -e "${red}[!]${gray} La instalacion de ${paquete} ha fallado.${end}"
@@ -66,6 +68,10 @@ for paquete in "${paquetes[@]}"; do
         echo -e "${green}[+] ${gray}$paquete ya esta instalado en tu sistema.${end}"
         sleep 0.5
     fi
+}
+
+for paquete in "${paquetes[@]}"; do
+    instalar_paquete "$paquete"
 done
 sleep 2
 
