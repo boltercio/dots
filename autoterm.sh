@@ -35,31 +35,31 @@ ${gray}┴ ┴└─┘ ┴ └─┘└─┘└─┘ ┴ └─┘┴
 "
 }
 
-### ---------- Comprobando directorio de trabajo ---------- ###
-local_dir=$(pwd)
-if [ "$local_dir" != "$HOME/dots" ]; then
-    echo -e "${red}[!]${gray} Debes ejecutar este script desde el directorio $HOME/dots${end}"
-    exit 1
-fi
-
 ### ---------- Instalando paquetes ---------- ###
+
+echo -e "${green}[+]${gray} Actualziando repositorios...${end}"
+sudo apt update &>/dev/null
+sudo apt full-upgrade -qq -y &>/dev/null
+
 function package_install() {
     paquete=$1
     if dpkg -s $paquete &>/dev/null; then
         echo -e "${green}[+]${gray} El paquete ${purple}$paquete${gray} ya está instalado.${end}"
     else
         echo -e "${green}[+]${gray} Instalando paquete ${purple}$paquete${gray}...${end}"
-        sudo apt install $paquete -y &>/dev/null
+        sudo apt install -qq $paquete -y &>/dev/null
         if [ $? -eq 0 ]; then
             echo -e "${green}[+]${gray} Paquete ${purple}$paquete${gray} instalado correctamente.${end}"
         else
             echo -e "${red}[!]${gray} Error al instalar el paquete ${purple}$paquete${end}"
         fi
     fi
+    sleep 0.5
 }
+
 logo
-echo -e "${gray}Instalando paquetes necesarios...${end}"
-paquetes=(zsh lsd bat curl wget qemu-guest-agent open-vm-tools)
+echo -e "${green}[+]${gray} Instalando paquetes necesarios...${end}"
+paquetes=(zsh lsd bat curl ranger wget qemu-guest-agent open-vm-tools)
 
 for paquete in "${paquetes[@]}"; do
     package_install $paquete
@@ -83,10 +83,23 @@ cp home/.zshrc $HOME/
 if [ ! -f $HOME/.config ]; then 
     mkdir -p $HOME/.config
 fi
-
 cp -r home/.config/zsh $HOME/.config/
+cp -r home/.config/nvim $HOME/.config/
 
+# Instalando fuentes
+echo -e "${green}[+]${gray} Instalando fuentes.${end}"
+mkdir -p /tmp/fonts
+wget -q --show-progress https://github.com/ryanoasis/nerd-fonts/releases/download/v3.0.2/Hack.zip -O /tmp/fonts/Hack.zip &>/dev/null
+unzip -q /tmp/fonts/Hack.zip -d /tmp/fonts
+wget -q --show-progress https://github.com/ryanoasis/nerd-fonts/releases/download/v3.0.2/JetBrainsMono.zip -O /tmp/fonts/JetBrainsMono.zip &>/dev/null
+unzip -q /tmp/fonts/JetBrainsMono.zip -d /tmp/fonts
+mkdir -p ~/.local/share/fonts
+mv -f /tmp/fonts/*.ttf ~/.local/share/fonts/
+rm -rf /tmp/fonts
+fc-cache -fv &>/dev/null
 
+# Instalando npm y neovim
+echo -e "${green}[+]${gray} Instalando Neovim...${end}"
 sudo apt install npm -y &>/dev/null
 cp -r home/.config/nvim $HOME/.config/
 wget https://github.com/neovim/neovim/releases/download/nightly/nvim-linux-arm64.tar.gz &>/dev/null
