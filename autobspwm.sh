@@ -208,8 +208,8 @@ chmod +x $HOME/.config/polybar/cuts/launch.sh
 chmod +x $HOME/.config/polybar/cuts/scripts/*
 
 for theme in Camila Esmeralda Nami Raven Ryan Simon Xavier Zenitsu; do
-    chmod +x $HOME/.themes/$theme/bspwmrc
-    chmod +x $HOME/.themes/$theme/scripts/*
+    chmod +x $HOME/.config/themes/$theme/bspwmrc
+    chmod +x $HOME/.config/themes/$theme/scripts/*
 done
 chmod -R +x $HOME/scripts/*
 
