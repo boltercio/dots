@@ -20,7 +20,7 @@ lred='\033[0;31m'
 
 # VARIABLES DATABASE
 USERNAME=$(whoami)
-THEMEDIR="/home/${USERNAME}/.themes"
+THEMEDIR="/home/${USERNAME}/.config/themes"
 POLYDIR="/home/${USERNAME}/.config/polybar/cuts"
 CONDIR="/home/${USERNAME}"
 
@@ -104,8 +104,6 @@ case $nmtheme in
 1)
 echo ""
 echo -e " ${White}[${Cyan}i${White}] Loading theme ${Red}[Zenitsu]${NC}"
-cd ${THEMEDIR}/Zenitsu/kitty
-cp color.ini ${CONDIR}/.config/kitty
 cd ${THEMEDIR}/Zenitsu
 cp bspwmrc ${CONDIR}/.config/bspwm
 cd ${THEMEDIR}/Zenitsu/polybar
@@ -123,8 +121,6 @@ exit 0 ;;
 2)
 echo ""
 echo -e " ${White}[${Cyan}i${White}] Loading theme ${Red}[Raven]${NC}"
-cd ${THEMEDIR}/Raven/kitty
-cp color.ini ${CONDIR}/.config/kitty
 cd ${THEMEDIR}/Raven
 cp bspwmrc ${CONDIR}/.config/bspwm
 cd ${THEMEDIR}/Raven/polybar
@@ -141,8 +137,6 @@ exit 0 ;;
 3)
 echo ""
 echo -e " ${White}[${Cyan}i${White}] Loading theme ${Red}[Simon]${NC}"
-cd ${THEMEDIR}/Simon/kitty
-cp color.ini ${CONDIR}/.config/kitty
 cd ${THEMEDIR}/Simon
 cp bspwmrc ${CONDIR}/.config/bspwm
 cd ${THEMEDIR}/Simon/polybar
@@ -159,8 +153,6 @@ exit 0 ;;
 4)
 echo ""
 echo -e " ${White}[${Cyan}i${White}] Loading theme ${Red}[Camila]${NC}"
-cd ${THEMEDIR}/Camila/kitty
-cp color.ini ${CONDIR}/.config/kitty
 cd ${THEMEDIR}/Camila
 cp bspwmrc ${CONDIR}/.config/bspwm
 cd ${THEMEDIR}/Camila/polybar
@@ -177,8 +169,6 @@ exit 0 ;;
 5)
 echo ""
 echo -e " ${White}[${Cyan}i${White}] Loading theme ${Red}[Ryan]${NC}"
-cd ${THEMEDIR}/Ryan/kitty
-cp color.ini ${CONDIR}/.config/kitty
 cd ${THEMEDIR}/Ryan
 cp bspwmrc ${CONDIR}/.config/bspwm
 cd ${THEMEDIR}/Ryan/polybar
@@ -195,8 +185,6 @@ exit 0 ;;
 6)
 echo ""
 echo -e " ${White}[${Cyan}i${White}] Loading theme ${Red}[Esmeralda]${NC}"
-cd ${THEMEDIR}/Esmeralda/kitty
-cp color.ini ${CONDIR}/.config/kitty
 cd ${THEMEDIR}/Esmeralda
 cp bspwmrc ${CONDIR}/.config/bspwm
 cd ${THEMEDIR}/Esmeralda/polybar
@@ -213,8 +201,6 @@ exit 0 ;;
 7)
 echo ""
 echo -e " ${White}[${Cyan}i${White}] Loading theme ${Red}[Xavier]${NC}"
-cd ${THEMEDIR}/Xavier/kitty
-cp color.ini ${CONDIR}/.config/kitty
 cd ${THEMEDIR}/Xavier
 cp bspwmrc ${CONDIR}/.config/bspwm
 cd ${THEMEDIR}/Xavier/polybar
@@ -231,8 +217,6 @@ exit 0 ;;
 8)
 echo ""
 echo -e " ${White}[${Cyan}i${White}] Loading theme ${Red}[Nami]${NC}"
-cd ${THEMEDIR}/Nami/kitty
-cp color.ini ${CONDIR}/.config/kitty
 cd ${THEMEDIR}/Nami
 cp bspwmrc ${CONDIR}/.config/bspwm
 cd ${THEMEDIR}/Nami/polybar
@@ -274,8 +258,6 @@ case $penetrationntheme in
 1)
 echo ""
 echo -e " ${White}[${Cyan}i${White}] Loading theme penetration mode ${Red}[Zenitsu]${NC}"
-cd ${THEMEDIR}/Zenitsu/kitty
-cp color.ini ${CONDIR}/.config/kitty
 cd ${THEMEDIR}/Zenitsu
 cp bspwmrc ${CONDIR}/.config/bspwm
 cd ${THEMEDIR}/Zenitsu/polybar
@@ -297,8 +279,6 @@ exit 0 ;;
 2)
 echo ""
 echo -e " ${White}[${Cyan}i${White}] Loading theme penetration mode ${Red}[Raven]${NC}"
-cd ${THEMEDIR}/Raven/kitty
-cp color.ini ${CONDIR}/.config/kitty
 cd ${THEMEDIR}/Raven
 cp bspwmrc ${CONDIR}/.config/bspwm
 cd ${THEMEDIR}/Raven/polybar
@@ -320,8 +300,6 @@ exit 0 ;;
 3)
 echo ""
 echo -e " ${White}[${Cyan}i${White}] Loading theme penetration mode ${Red}[Simon]${NC}"
-cd ${THEMEDIR}/Simon/kitty
-cp color.ini ${CONDIR}/.config/kitty
 cd ${THEMEDIR}/Simon
 cp bspwmrc ${CONDIR}/.config/bspwm
 cd ${THEMEDIR}/Simon/polybar
@@ -343,8 +321,6 @@ exit 0 ;;
 4)
 echo ""
 echo -e " ${White}[${Cyan}i${White}] Loading theme penetration mode ${Red}[Camila]${NC}"
-cd ${THEMEDIR}/Camila/kitty
-cp color.ini ${CONDIR}/.config/kitty
 cd ${THEMEDIR}/Camila
 cp bspwmrc ${CONDIR}/.config/bspwm
 cd ${THEMEDIR}/Camila/polybar
@@ -366,8 +342,6 @@ exit 0 ;;
 5)
 echo ""
 echo -e " ${White}[${Cyan}i${White}] Loading theme penetration mode ${Red}[Ryan]${NC}"
-cd ${THEMEDIR}/Ryan/kitty
-cp color.ini ${CONDIR}/.config/kitty
 cd ${THEMEDIR}/Ryan
 cp bspwmrc ${CONDIR}/.config/bspwm
 cd ${THEMEDIR}/Ryan/polybar
@@ -389,8 +363,6 @@ exit 0 ;;
 6)
 echo ""
 echo -e " ${White}[${Cyan}i${White}] Loading theme penetration mode ${Red}[Esmeralda]${NC}"
-cd ${THEMEDIR}/Esmeralda/kitty
-cp color.ini ${CONDIR}/.config/kitty
 cd ${THEMEDIR}/Esmeralda
 cp bspwmrc ${CONDIR}/.config/bspwm
 cd ${THEMEDIR}/Esmeralda/polybar
@@ -412,8 +384,6 @@ exit 0 ;;
 7)
 echo ""
 echo -e " ${White}[${Cyan}i${White}] Loading theme penetration mode ${Red}[Xavier]${NC}"
-cd ${THEMEDIR}/Xavier/kitty
-cp color.ini ${CONDIR}/.config/kitty
 cd ${THEMEDIR}/Xavier
 cp bspwmrc ${CONDIR}/.config/bspwm
 cd ${THEMEDIR}/Xavier/polybar
@@ -435,8 +405,6 @@ exit 0 ;;
 8)
 echo ""
 echo -e " ${White}[${Cyan}i${White}] Loading theme penetration mode ${Red}[Nami]${NC}"
-cd ${THEMEDIR}/Nami/kitty
-cp color.ini ${CONDIR}/.config/kitty
 cd ${THEMEDIR}/Nami
 cp bspwmrc ${CONDIR}/.config/bspwm
 cd ${THEMEDIR}/Nami/polybar
