@@ -61,7 +61,7 @@ echo -e "${green}[+]${gray} Instalando paquetes necesarios... ${end}"
 paquetes=(zsh lsd bat curl wget acpi open-vm-tools open-vm-tools-desktop build-essential \
 feh rofi xclip xsel bspwm sxhkd polybar picom kitty ranger unzip locate acpi nala \
 ffmpeg 7zip jq poppler-utils fd-find ripgrep fzf zoxide imagemagick xdotool \
-xorg fastfetch wmname fonts-font-awesome fonts-firacode)
+xorg fastfetch wmname fonts-font-awesome fonts-firacode firefox-esr)
 
 for paquete in "${paquetes[@]}"; do
     package_install "$paquete"
