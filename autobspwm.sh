@@ -60,7 +60,7 @@ logo
 echo -e "${green}[+]${gray} Instalando paquetes necesarios... ${end}"
 paquetes=(zsh lsd bat curl wget acpi open-vm-tools open-vm-tools-desktop build-essential \
 feh rofi xclip xsel bspwm sxhkd plybar picom kitty ranger unzip locate acpi \
-ffmpeg 7zip jq poppler-utils fd-find ripgrep fzf zoxide imagemagick \
+ffmpeg 7zip jq poppler-utils fd-find ripgrep fzf zoxide imagemagick xdotool \
 xorg fastfech wmname fonts-font-awesome fonts-firacode)
 
 for paquete in "${paquetes[@]}"; do
@@ -80,22 +80,10 @@ sudo mv /usr/share/zsh-* /usr/share/zsh/plugins/
 
 # copiar directorios de configuracion
 echo -e "${green}[+]${gray} Copiando configuraciones.${end}"
-cp home/.zshrc $HOME/
-if [ ! -d $HOME/.config ]; then 
-    mkdir -p $HOME/.config
-fi
-cp -r home/.config/* $HOME/.config/
+cp home/* $HOME/
 
 # Instalando fuentes
 echo -e "${green}[+]${gray} Instalando fuentes.${end}"
-mkdir -p /tmp/fonts
-wget -q --show-progress https://github.com/ryanoasis/nerd-fonts/releases/download/v3.0.2/Hack.zip -O /tmp/fonts/Hack.zip &>/dev/null
-unzip -q /tmp/fonts/Hack.zip -d /tmp/fonts
-wget -q --show-progress https://github.com/ryanoasis/nerd-fonts/releases/download/v3.0.2/JetBrainsMono.zip -O /tmp/fonts/JetBrainsMono.zip &>/dev/null
-unzip -q /tmp/fonts/JetBrainsMono.zip -d /tmp/fonts
-mkdir -p ~/.local/share/fonts
-mv -f /tmp/fonts/*.ttf ~/.local/share/fonts/
-rm -rf /tmp/fonts
 fc-cache -fv &>/dev/null
 
 # Instalando npm y neovim
@@ -108,11 +96,10 @@ sudo mv nvim-linux-arm64 /opt/nvim
 sudo ln -s /opt/nvim/bin/nvim /usr/bin/nvim
 rm -rf nvim-linux-arm64.tar.gz
 
-# Instalando display manager lightdm
-echo -e "${green}[+]${gray} Instalando y configurando lightDM."
-sudo apt install lightdm -qq -y &>/dev/null
-#sudo sed -i s/#autologin-user=/autologin-user=$USER/g /etc/lightdm/lightdm.conf
-sudo systemctl enable lightdm
+# Instalando sddm y tema personalizado
+echo -e "${green}[+]${gray} Instalando y configurando SDDM.${end}"
+/install_scripts/sddm.sh
+/install_scripts/sddm_theme.sh
 
 # Configurando tema de grub
 if [ -d /boot/grub/themes/kali ]; then
@@ -124,7 +111,7 @@ fi
 
 echo -e "${green}[+]${gray} Configurando tema de GRUB.${end}"
 wget -P /tmp https://github.com/shvchk/fallout-grub-theme/raw/master/install.sh &>/dev/null
-bash /tmp/install.sh --lang Spanish
+sudo bash /tmp/install.sh --lang Spanish
 
 # Cambiando shell por defecto
 echo -e "${green}[+]${gray} Cambiando shell por defecto.${end}" 
