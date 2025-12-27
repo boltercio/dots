@@ -43,60 +43,23 @@ update () {
 echo ""
 banner
 echo ""
-echo -e "${Blue} [${Yellow}⇅${Blue}]${White} Checking nala from-end apt"
+echo -e "${Blue} [${Yellow}⇅${Blue}]${White} comprobando si nala esta instalado..."
 if which nala >/dev/null; then
 	sleep 1
 	echo ""
-	echo -e "${Blue} [${Cyan}i${Blue}]${White} Nala is installed on your system..."
-	echo -e "${Blue} [${Cyan}i${Blue}]${White} What do you want to do after the update?"
+	echo -e "${Blue} [${Cyan}i${Blue}]${White} Nala esta instalado, procediendo a actualizar el sistema..."
 	echo ""
-	echo -e "${Blue} [${Cyan}N${Blue}] Nothing"
-	echo -e "${Blue} [${Cyan}R${Blue}] Restart"
-	echo -e "${Blue} [${Cyan}H${Blue}] Shutdown"
-	echo ""
-	echo -ne "${White} > "
-	read Quest
-	case $Quest in
-	N)
-	echo ""
-	echo -e "${Blue}[${Yellow}⇅${Blue}]${White} Updating system"
 	sudo nala update>/dev/null
 	sudo nala list --upgradable
 	sleep 3
 	sudo nala upgrade -y
-	exit 0
-	;;
-	R)
-	echo ""
-	echo -e "${Blue}[${Yellow}⇅${Blue}]${White} Updating system and reboot"
-	sudo nala update>/dev/null
-        sudo nala list --upgradable
-	sleep 3
-	sudo nala upgrade -y && sudo systemctl reboot
-	exit 0
-	;;
-	H)
-	echo ""
-	echo -e "${Blue}[${Yellow}⇅${Blue}]${White} Updating system and shutting down"
-	sudo nala update>/dev/null
-        sudo nala list --upgradable
-	sleep 3
-	sudo nala upgrade -y && sudo shutdown now
-	exit 0
-	;;
-	*)
-	echo ""
-	echo -e "${Blue}[${Yellow}⇅${Blue}]${White} Invalid option, use the capital letters N/R/H launch the script again!"
-	sleep 2
-	exit 1
-esac
 else
 	echo ""
 	sleep 1
-	echo -e "${Blue}[${Cyan}i${Blue}]${White} Installing nala from-end apt"
+	echo -e "${Blue}[${Cyan}i${Blue}]${White} Instalando nala desde apt"
 	sudo apt install nala -y
 	echo ""
-	echo -e "${Blue} [${Cyan}i${Blue}]${White} Nala is already installed, launch the script again!"
+	echo -e "${Blue} [${Cyan}i${Blue}]${White} Nala ya esta instalado, ejecuta el script de nuevo!"
 	sleep 1
 	exit 0
 fi
