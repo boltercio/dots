@@ -197,6 +197,7 @@ function install_sddm_theme() {
 }
 
 install_sddm_theme
+sudo systemctl enable sddm &>/dev/null
 
 # Configurando tema de grub
 if [ -d /boot/grub/themes/kali ]; then
