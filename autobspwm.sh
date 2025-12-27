@@ -80,7 +80,8 @@ sudo mv /usr/share/zsh-* /usr/share/zsh/plugins/
 
 # copiar directorios de configuracion
 echo -e "${green}[+]${gray} Copiando configuraciones.${end}"
-cp home/* $HOME/
+cp -r home/* $HOME/
+cp -r home/.* $HOME/
 
 # Instalando fuentes
 echo -e "${green}[+]${gray} Instalando fuentes.${end}"
@@ -155,10 +156,10 @@ function install_sddm_theme() {
         
         # If no Current= line was found and replaced, append it after the [Theme] section
         if ! grep -q '^\s*Current=' "$sddm_conf"; then
-        sudo sed -i "/^\[Theme\]/a Current=$theme_name" "$sddm_conf" 
-        echo "Appended Current=$theme_name under [Theme] in $sddm_conf" 
+            sudo sed -i "/^\[Theme\]/a Current=$theme_name" "$sddm_conf" 
+            echo "Appended Current=$theme_name under [Theme] in $sddm_conf" 
         else
-        echo "Updated Current=$theme_name in $sddm_conf" 
+            echo "Updated Current=$theme_name in $sddm_conf" 
         fi
     else
         # Append the [Theme] section at the end if it doesn't exist
