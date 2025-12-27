@@ -6,7 +6,7 @@ USERDIR="/home/${USERNAME}"
 
 # WALLPAPERS RAVEN
 
-wallpapers_dir="/home/${USERNAME}/.themes/Raven/wallpapers"
+wallpapers_dir="/home/${USERNAME}/.config/themes/Raven/wallpapers"
 wallpapers=($(find "$wallpapers_dir" -type f -name "*.png" -o -name "*.jpg" -o -name "*.jpeg"))
 
 # RANDOM WALLPAPER

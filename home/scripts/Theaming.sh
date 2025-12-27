@@ -109,9 +109,6 @@ cp bspwmrc ${CONDIR}/.config/bspwm
 cd ${THEMEDIR}/Zenitsu/polybar
 cp user_modules.ini colors.ini config.ini ${CONDIR}/.config/polybar/cuts
 cp colors.rasi ${CONDIR}/.config/polybar/cuts/scripts/rofi
-echo ""
-betterlockscreen -u ${THEMEDIR}/Zenitsu/wallpapers/wal-0.png
-echo ""
 bspc wm -r
 #polybar-msg cmd restart
 echo -e " ${White}[${Cyan}i${White}] ${Red}[Zenitsu]${White} theme applied correctly"
@@ -126,9 +123,6 @@ cp bspwmrc ${CONDIR}/.config/bspwm
 cd ${THEMEDIR}/Raven/polybar
 cp user_modules.ini colors.ini config.ini ${CONDIR}/.config/polybar/cuts
 cp colors.rasi ${CONDIR}/.config/polybar/cuts/scripts/rofi
-echo ""
-betterlockscreen -u ${THEMEDIR}/Raven/wallpapers/wal-0.png
-echo ""
 bspc wm -r
 echo -e " ${White}[${Cyan}i${White}] ${Red}[Raven]${White} theme applied correctly"
 sleep 2
@@ -142,9 +136,6 @@ cp bspwmrc ${CONDIR}/.config/bspwm
 cd ${THEMEDIR}/Simon/polybar
 cp user_modules.ini colors.ini config.ini ${CONDIR}/.config/polybar/cuts
 cp colors.rasi ${CONDIR}/.config/polybar/cuts/scripts/rofi
-echo ""
-betterlockscreen -u ${THEMEDIR}/Simon/wallpapers/wal-0.png
-echo ""
 bspc wm -r
 echo -e " ${White}[${Cyan}i${White}] ${Red}[Simon]${White} theme applied correctly"
 sleep 2
@@ -158,9 +149,6 @@ cp bspwmrc ${CONDIR}/.config/bspwm
 cd ${THEMEDIR}/Camila/polybar
 cp user_modules.ini colors.ini config.ini ${CONDIR}/.config/polybar/cuts
 cp colors.rasi ${CONDIR}/.config/polybar/cuts/scripts/rofi
-echo ""
-betterlockscreen -u ${THEMEDIR}/Camila/wallpapers/wal-0.png
-echo ""
 bspc wm -r
 echo -e " ${White}[${Cyan}i${White}] ${Red}[Camila]${White} theme applied correctly"
 sleep 2
@@ -174,9 +162,6 @@ cp bspwmrc ${CONDIR}/.config/bspwm
 cd ${THEMEDIR}/Ryan/polybar
 cp user_modules.ini colors.ini config.ini ${CONDIR}/.config/polybar/cuts
 cp colors.rasi ${CONDIR}/.config/polybar/cuts/scripts/rofi
-echo ""
-betterlockscreen -u ${THEMEDIR}/Ryan/wallpapers/wal-0.png
-echo ""
 bspc wm -r
 echo -e " ${White}[${Cyan}i${White}] ${Red}[Ryan]${White} theme applied correctly"
 sleep 2
@@ -190,9 +175,6 @@ cp bspwmrc ${CONDIR}/.config/bspwm
 cd ${THEMEDIR}/Esmeralda/polybar
 cp user_modules.ini colors.ini config.ini ${CONDIR}/.config/polybar/cuts
 cp colors.rasi ${CONDIR}/.config/polybar/cuts/scripts/rofi
-echo ""
-betterlockscreen -u ${THEMEDIR}/Esmeralda/wallpapers/wal-0.png
-echo ""
 bspc wm -r
 echo -e " ${White}[${Cyan}i${White}] ${Red}[Esmeralda]${White} theme applied correctly"
 sleep 2
@@ -206,9 +188,6 @@ cp bspwmrc ${CONDIR}/.config/bspwm
 cd ${THEMEDIR}/Xavier/polybar
 cp user_modules.ini colors.ini config.ini ${CONDIR}/.config/polybar/cuts
 cp colors.rasi ${CONDIR}/.config/polybar/cuts/scripts/rofi
-echo ""
-betterlockscreen -u ${THEMEDIR}/Xavier/wallpapers/wal-0.png
-echo ""
 bspc wm -r
 echo -e " ${White}[${Cyan}i${White}] ${Red}[Xavier]${White} theme applied correctly"
 sleep 2
@@ -222,9 +201,6 @@ cp bspwmrc ${CONDIR}/.config/bspwm
 cd ${THEMEDIR}/Nami/polybar
 cp user_modules.ini colors.ini config.ini ${CONDIR}/.config/polybar/cuts
 cp colors.rasi ${CONDIR}/.config/polybar/cuts/scripts/rofi
-echo ""
-betterlockscreen -u ${THEMEDIR}/Nami/wallpapers/wal-0.png
-echo ""
 bspc wm -r
 echo -e " ${White}[${Cyan}i${White}] ${Red}[Nami]${White} theme applied correctly"
 sleep 2
@@ -267,9 +243,6 @@ cd ${THEMEDIR}/Zenitsu/bar_pentest
 cp config.ini ${CONDIR}/.config/polybar/cuts
 cd ${THEMEDIR}/Zenitsu/scripts
 cp ethernet_status.sh machine_target.sh vpn_status.sh ${CONDIR}/.config/polybar/cuts/scripts
-echo ""
-betterlockscreen -u ${THEMEDIR}/Zenitsu/wallpapers/wal-0.png
-echo ""
 bspc wm -r
 #polybar-msg cmd restart
 echo -e " ${White}[${Cyan}i${White}] ${Red}[Zenitsu]${White} theme applied correctly"
@@ -288,9 +261,6 @@ cd ${THEMEDIR}/Raven/bar_pentest
 cp config.ini ${CONDIR}/.config/polybar/cuts
 cd ${THEMEDIR}/Raven/scripts
 cp ethernet_status.sh machine_target.sh vpn_status.sh ${CONDIR}/.config/polybar/cuts/scripts
-echo ""
-betterlockscreen -u ${THEMEDIR}/Raven/wallpapers/wal-0.png
-echo ""
 bspc wm -r
 #polybar-msg cmd restart
 echo -e " ${White}[${Cyan}i${White}] ${Red}[Raven]${White} theme applied correctly"
@@ -309,9 +279,6 @@ cd ${THEMEDIR}/Simon/bar_pentest
 cp config.ini ${CONDIR}/.config/polybar/cuts
 cd ${THEMEDIR}/Simon/scripts
 cp ethernet_status.sh machine_target.sh vpn_status.sh ${CONDIR}/.config/polybar/cuts/scripts
-echo ""
-betterlockscreen -u ${THEMEDIR}/Simon/wallpapers/wal-0.png
-echo ""
 bspc wm -r
 #polybar-msg cmd restart
 echo -e " ${White}[${Cyan}i${White}] ${Red}[Simon]${White} theme applied correctly"
@@ -330,9 +297,6 @@ cd ${THEMEDIR}/Camila/bar_pentest
 cp config.ini ${CONDIR}/.config/polybar/cuts
 cd ${THEMEDIR}/Camila/scripts
 cp ethernet_status.sh machine_target.sh vpn_status.sh ${CONDIR}/.config/polybar/cuts/scripts
-echo ""
-betterlockscreen -u ${THEMEDIR}/Camila/wallpapers/wal-0.png
-echo ""
 bspc wm -r
 #polybar-msg cmd restart
 echo -e " ${White}[${Cyan}i${White}] ${Red}[Camila]${White} theme applied correctly"
@@ -351,9 +315,6 @@ cd ${THEMEDIR}/Ryan/bar_pentest
 cp config.ini ${CONDIR}/.config/polybar/cuts
 cd ${THEMEDIR}/Ryan/scripts
 cp ethernet_status.sh machine_target.sh vpn_status.sh ${CONDIR}/.config/polybar/cuts/scripts
-echo ""
-betterlockscreen -u ${THEMEDIR}/Ryan/wallpapers/wal-0.png
-echo ""
 bspc wm -r
 #polybar-msg cmd restart
 echo -e " ${White}[${Cyan}i${White}] ${Red}[Ryan]${White} theme applied correctly"
@@ -372,9 +333,6 @@ cd ${THEMEDIR}/Esmeralda/bar_pentest
 cp config.ini ${CONDIR}/.config/polybar/cuts
 cd ${THEMEDIR}/Esmeralda/scripts
 cp ethernet_status.sh machine_target.sh vpn_status.sh ${CONDIR}/.config/polybar/cuts/scripts
-echo ""
-betterlockscreen -u ${THEMEDIR}/Esmeralda/wallpapers/wal-0.png
-echo ""
 bspc wm -r
 #polybar-msg cmd restart
 echo -e " ${White}[${Cyan}i${White}] ${Red}[Esmeralda]${White} theme applied correctly"
@@ -393,9 +351,6 @@ cd ${THEMEDIR}/Xavier/bar_pentest
 cp config.ini ${CONDIR}/.config/polybar/cuts
 cd ${THEMEDIR}/Xavier/scripts
 cp ethernet_status.sh machine_target.sh vpn_status.sh ${CONDIR}/.config/polybar/cuts/scripts
-echo ""
-betterlockscreen -u ${THEMEDIR}/Xavier/wallpapers/wal-0.png
-echo ""
 bspc wm -r
 #polybar-msg cmd restart
 echo -e " ${White}[${Cyan}i${White}] ${Red}[Xavier]${White} theme applied correctly"
@@ -414,9 +369,6 @@ cd ${THEMEDIR}/Nami/bar_pentest
 cp config.ini ${CONDIR}/.config/polybar/cuts
 cd ${THEMEDIR}/Nami/scripts
 cp ethernet_status.sh machine_target.sh vpn_status.sh ${CONDIR}/.config/polybar/cuts/scripts
-echo ""
-betterlockscreen -u ${THEMEDIR}/Nami/wallpapers/wal-0.png
-echo ""
 bspc wm -r
 #polybar-msg cmd restart
 echo -e " ${White}[${Cyan}i${White}] ${Red}[Nami]${White} theme applied correctly"
