@@ -200,6 +200,7 @@ install_sddm_theme
 sudo systemctl enable sddm &>/dev/null
 
 # Configurando permisos
+echo -e "${green}[+]${gray} Configurando permisos de scripts.${end}"
 chmod +x $HOME/.config/bspwm/bspwmrc
 chmod +x $HOME/.config/sxhkd/sxhkdrc
 chmod +x $HOME/.config/polybar/launch.sh
