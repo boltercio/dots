@@ -115,6 +115,7 @@ fi
 if [ -d "$theme_name" ]; then
   rm -rf "$theme_name"
   echo -e "\e[1A\e[K${OK} - Removed existing $theme_name directory from the current location." 
+fi
 
 # Clone the repository
 function install_sddm_theme() {
@@ -193,6 +194,8 @@ function install_sddm_theme() {
     echo "${ERROR} - Failed to clone the sddm theme repository. Please check your internet connection." 
     fi
 }
+
+install_sddm_theme
 
 # Configurando tema de grub
 if [ -d /boot/grub/themes/kali ]; then
