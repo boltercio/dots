@@ -48,7 +48,7 @@ function package_install() {
     else
         sudo apt-get install -qq -y "$paquete" &>/dev/null
         if [ $? == 0 ]; then
-            echo -e "${green}[+]${gray} Paqute ${purple}$paquete${gray} instalado correctamente.${end}"
+            echo -e "${green}[+]${gray} Paquete ${purple}$paquete${gray} instalado correctamente.${end}"
         else
             echo -e "${red}[!] ${gray}Error al instalar el paquete ${purple}$paquete${end}"
         fi
@@ -80,7 +80,6 @@ sudo mv /usr/share/zsh-* /usr/share/zsh/plugins/
 
 # copiar directorios de configuracion
 echo -e "${green}[+]${gray} Copiando configuraciones.${end}"
-cp -r home/* $HOME/
 cp -r home/.* $HOME/
 
 # Instalando fuentes
@@ -99,7 +98,7 @@ rm -rf nvim-linux-arm64.tar.gz
 
 # Instalando sddm y tema personalizado
 echo -e "${green}[+]${gray} Instalando y configurando SDDM.${end}"
-sddm=( libqt6svg6 qt6-declarative-dev qt6-svg-dev qt6-virtualkeyboard-plugin libqt6multimedia6 qml6-module-qtquick-controls qml6-module-qtquick-effects )
+sddm=( sddm libqt6svg6 qt6-declarative-dev qt6-svg-dev qt6-virtualkeyboard-plugin libqt6multimedia6 qml6-module-qtquick-controls qml6-module-qtquick-effects )
 for PKG1 in "${sddm[@]}" ; do
   sudo apt install --no-install-recommends -y "$PKG1" &>/dev/null
 done
