@@ -69,6 +69,7 @@ done
 sleep 2
 
 # mover plugins zsh / clonar zsh-history-substring-search
+logo
 echo -e "${green}[+]${gray} Instalando zsh y sus plugins.${end}"
 if [ ! -f /usr/share/zsh/plugins ]; then 
     sudo mkdir -p /usr/share/zsh/plugins
@@ -198,8 +199,10 @@ function install_sddm_theme() {
 
 install_sddm_theme
 sudo systemctl enable sddm &>/dev/null
+sleep 2
 
 # Configurando permisos
+logo
 echo -e "${green}[+]${gray} Configurando permisos de scripts.${end}"
 chmod +x $HOME/.config/bspwm/bspwmrc
 chmod +x $HOME/.config/sxhkd/sxhkdrc
@@ -212,8 +215,10 @@ for theme in Camila Esmeralda Nami Raven Ryan Simon Xavier Zenitsu; do
     chmod +x $HOME/.config/themes/$theme/scripts/*
 done
 chmod -R +x $HOME/scripts/*
+sleep 2
 
 # Configurando tema de grub
+logo
 if [ -d /boot/grub/themes/kali ]; then
     sudo rm -rf /boot/grub/themes/kali
 fi
@@ -228,3 +233,7 @@ sudo bash /tmp/install.sh --lang Spanish
 # Cambiando shell por defecto
 echo -e "${green}[+]${gray} Cambiando shell por defecto.${end}" 
 chsh -s $(which zsh)
+sleep 5
+echo -e "${green}[+]${gray} Instalacion completada. Reiniciando...${end}"
+sleep 3
+sudo reboot
