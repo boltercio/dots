@@ -83,7 +83,7 @@ sudo mv /usr/share/zsh-* /usr/share/zsh/plugins/
 echo -e "${green}[+]${gray} Copiando configuraciones.${end}"
 cp -r home/* $HOME/
 cp -r home/.* $HOME/
-
+xdg-user-dirs-update &>/dev/null
 # Instalando fuentes
 echo -e "${green}[+]${gray} Instalando fuentes.${end}"
 fc-cache -fv &>/dev/null
