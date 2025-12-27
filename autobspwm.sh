@@ -80,6 +80,7 @@ sudo mv /usr/share/zsh-* /usr/share/zsh/plugins/
 
 # copiar directorios de configuracion
 echo -e "${green}[+]${gray} Copiando configuraciones.${end}"
+cp -r home/* $HOME/
 cp -r home/.* $HOME/
 
 # Instalando fuentes
@@ -202,6 +203,14 @@ sudo systemctl enable sddm &>/dev/null
 chmod +x $HOME/.config/bspwm/bspwmrc
 chmod +x $HOME/.config/sxhkd/sxhkdrc
 chmod +x $HOME/.config/polybar/launch.sh
+chmod +x $HOME/.config/polybar/cuts/launch.sh
+chmod +x $HOME/.config/polybar/cuts/scripts/*
+
+for theme in Camila Esmeralda Nami Raven Ryan Simon Xavier Zenitsu; do
+    chmod +x $HOME/.themes/$theme/bspwmrc
+    chmod +x $HOME/.themes/$theme/scripts/*
+done
+chmod -R +x $HOME/scripts/*
 
 # Configurando tema de grub
 if [ -d /boot/grub/themes/kali ]; then
