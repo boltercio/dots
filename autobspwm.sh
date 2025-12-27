@@ -198,6 +198,11 @@ function install_sddm_theme() {
 install_sddm_theme
 sudo systemctl enable sddm &>/dev/null
 
+# Configurando permisos
+chmod +x $HOME/.config/bspwm/bspwmrc
+chmod +x $HOME/.config/sxhkd/sxhkdrc
+chmod +x $HOME/.config/polybar/launch.sh
+
 # Configurando tema de grub
 if [ -d /boot/grub/themes/kali ]; then
     sudo rm -rf /boot/grub/themes/kali
