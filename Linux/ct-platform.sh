@@ -27,9 +27,9 @@ function logo() {
 # Letra "Calvin S" de https://www.freetool.dev/es/generador-de-letras-ascii
 clear
 echo -e "
-${gray}┌─┐┬ ┬┌┬┐┌─┐┌─┐┌─┐┌┬┐┬ ┬┌─┐
-${gray}├─┤│ │ │ │ │└─┐├┤  │ │ │├─┘
-${gray}┴ ┴└─┘ ┴ └─┘└─┘└─┘ ┴ └─┘┴  
+${gray}┌─┐┬  ┌─┐┌┬┐┌─┐┌─┐┌─┐┬─┐┌┬┐┌─┐┬─┐  ┌─┐┌┬┐${end}
+${gray}├─┘│  ├─┤ │ ├─┤├┤ │ │├┬┘│││├─┤├┬┘  │   │ ${end}
+${gray}┴  ┴─┘┴ ┴ ┴ ┴ ┴└  └─┘┴└─┴ ┴┴ ┴┴└─  └─┘ ┴ ${end}
                         ${turquoise}By Boltercio${end}
 
 "
@@ -59,7 +59,7 @@ function package_install() {
 
 logo
 echo -e "${green}[+]${gray} Instalando paquetes necesarios...${end}"
-paquetes=(zsh lsd bat curl ranger wget qemu-guest-agent open-vm-tools)
+paquetes=(zsh lsd bat curl ranger wget qemu-guest-agent)
 
 for paquete in "${paquetes[@]}"; do
     package_install $paquete
@@ -85,6 +85,7 @@ if [ ! -f $HOME/.config ]; then
 fi
 cp -r home/.config/zsh $HOME/.config/
 cp -r home/.config/nvim $HOME/.config/
+cp -r home/.config/ranger $HOME/.config/
 
 # Instalando fuentes
 echo -e "${green}[+]${gray} Instalando fuentes.${end}"
@@ -111,6 +112,9 @@ rm -rf nvim-linux-arm64.tar.gz
 echo -e "${green}[+]${gray} Eliminando repositorio descargado.${end}"
 cd $HOME
 rm -rf dots
+
+# Instalando cliente wazuh
+wget https://packages.wazuh.com/4.x/apt/pool/main/w/wazuh-agent/wazuh-agent_4.14.3-1_arm64.deb && sudo WAZUH_MANAGER='192.168.0.100' WAZUH_AGENT_NAME="$(hostname)" dpkg -i ./wazuh-agent_4.14.3-1_arm64.deb
 
 # Cambiando shell por defecto
 echo -e "${green}[+]${gray} Cambiando shell por defecto.${end}" 

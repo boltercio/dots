@@ -1,0 +1,35 @@
+#!/usr/bin/bash
+
+### ---------- Basicos scripts ---------- ### 
+
+green="\e[0;32m\033[1m"           # Correct message
+red="\e[0;31m\033[1m"             # Failed message
+blue="\e[0;34m\033[1m"            # Normal message
+yellow="\e[0;33m\033[1m"          # Warning message
+purple="\e[0;35m\033[1m"          # Resalto de variable
+turquoise="\e[0;36m\033[1m"
+gray="\e[0;37m\033[1m"            # Color normal
+end="\033[0m\e[0m"                # Final de color
+
+function y() {
+	local tmp="$(mktemp -t "yazi-cwd.XXXXXX")" cwd
+	yazi "$@" --cwd-file="$tmp"
+	if cwd="$(command cat -- "$tmp")" && [ -n "$cwd" ] && [ "$cwd" != "$PWD" ]; then
+		builtin cd -- "$cwd"
+	fi
+	rm -f -- "$tmp"
+}
+
+function ran {
+  local temp_file="$(mktemp -t "ranger_cd.XXXXXXXXXX")"
+  # Al salir con Q, escribimos el directorio actual en el archivo temporal
+  command ranger --cmd="map q chain shell echo %d > $temp_file; quitall" "$@"
+
+  if [ -f "$temp_file" ]; then
+    if [ -s "$temp_file" ]; then
+      # Si el archivo tiene contenido (salida con Q), hacemos cd
+      cd "$(cat "$temp_file")"
+    fi
+    rm -f "$temp_file"
+  fi
+}

@@ -14,23 +14,18 @@ end="\033[0m\e[0m"                # Final de color
 
 
 function updateSystem () {
-    echo ""
     echo -e "${blue} [${yellow}⇅${blue}]${gray} comprobando si nala esta instalado..."
     if which nala >/dev/null; then
         sleep 1
-        echo ""
         echo -e "${blue} [${turquoise}i${blue}]${gray} Nala esta instalado, procediendo a actualizar el sistema..."
-        echo ""
         sudo nala update>/dev/null
         sudo nala list --upgradable
         sleep 3
         sudo nala upgrade -y
     else
-        echo ""
         sleep 1
         echo -e "${blue}[${turquoise}i${blue}]${gray} Instalando nala desde apt"
         sudo apt install nala -y
-        echo ""
         echo -e "${blue} [${turquoise}i${blue}]${gray} Nala ya esta instalado, ejecuta el script de nuevo!"
         sleep 1
         exit 0
