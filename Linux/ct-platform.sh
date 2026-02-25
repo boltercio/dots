@@ -113,7 +113,14 @@ echo -e "${green}[+]${gray} Eliminando repositorio descargado.${end}"
 cd $HOME
 rm -rf dots
 
+# deshabilitando configuracion automatica de red
+echo -e "${green}[+]${gray} Parando configuracion automatica de red.${end}"
+systemctl stop systemd-networkd &>/dev/null
+systemctl disable systemd-networkd &>/dev/null
+systemctl mask systemd-networkd &>/dev/null
+
 # Instalando cliente wazuh
+echo -e "${green}[+]${gray} Instalando agente de monitoreo wazuh.${end}"
 wget https://packages.wazuh.com/4.x/apt/pool/main/w/wazuh-agent/wazuh-agent_4.14.3-1_arm64.deb && sudo WAZUH_MANAGER='192.168.0.100' WAZUH_AGENT_NAME="$(hostname)" dpkg -i ./wazuh-agent_4.14.3-1_arm64.deb
 
 # Cambiando shell por defecto
