@@ -59,7 +59,7 @@ function package_install() {
 
 logo
 echo -e "${green}[+]${gray} Instalando paquetes necesarios...${end}"
-paquetes=(zsh lsd bat curl lsb-config wget qemu-guest-agent)
+paquetes=(zsh lsd bat git lsb-release wget qemu-guest-agent)
 
 for paquete in "${paquetes[@]}"; do
     package_install $paquete
