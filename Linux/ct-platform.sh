@@ -122,6 +122,8 @@ echo -e "${green}[+]${gray} Parando configuracion automatica de red.${end}"
 systemctl stop systemd-networkd &>/dev/null
 systemctl disable systemd-networkd &>/dev/null
 systemctl mask systemd-networkd &>/dev/null
+systemctl enable networking
+systemctl start networking
 
 # Instalando cliente wazuh
 echo -e "${green}[+]${gray} Instalando agente de monitoreo wazuh.${end}"
