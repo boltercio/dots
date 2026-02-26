@@ -72,6 +72,11 @@ if [ ! -f /usr/share/zsh/plugins ]; then
     sudo mkdir -p /usr/share/zsh/plugins
 fi
 
+# descargando repositorio
+cd $HOME
+git clone https://github.com/boltercio/dots
+cd dots
+
 sudo apt install zsh zsh-autosuggestions zsh-syntax-highlighting -y &>/dev/null
 git clone https://github.com/zsh-users/zsh-history-substring-search.git &>/dev/null
 sudo mv zsh-* /usr/share/zsh/plugins/
