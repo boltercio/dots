@@ -83,13 +83,13 @@ sudo mv /usr/share/zsh-* /usr/share/zsh/plugins/
 
 # copiar directorios de configuracion
 echo -e "${green}[+]${gray} Copiando configuraciones.${end}"
-cp dots/home/.zshrc $HOME/
+cp dots/Linux/home/.zshrc $HOME/
 if [ ! -f $HOME/.config ]; then 
     mkdir -p $HOME/.config
 fi
-cp -r dots/home/.config/zsh $HOME/.config/
-cp -r dots/home/.config/nvim $HOME/.config/
-cp -r dots/home/.config/ranger $HOME/.config/
+cp -r dots/Linux/home/.config/zsh $HOME/.config/
+cp -r dots/Linux/home/.config/nvim $HOME/.config/
+cp -r dots/Linux/home/.config/ranger $HOME/.config/
 
 # Instalando fuentes
 echo -e "${green}[+]${gray} Instalando fuentes.${end}"
@@ -106,7 +106,7 @@ fc-cache -fv &>/dev/null
 # Instalando npm y neovim
 echo -e "${green}[+]${gray} Instalando Neovim...${end}"
 sudo apt install npm -y &>/dev/null
-cp -r dots/home/.config/nvim $HOME/.config/
+cp -r dots/Linux/home/.config/nvim $HOME/.config/
 wget https://github.com/neovim/neovim/releases/download/nightly/nvim-linux-arm64.tar.gz &>/dev/null
 tar -zxf nvim-linux-arm64.tar.gz
 sudo mv nvim-linux-arm64 /opt/nvim
