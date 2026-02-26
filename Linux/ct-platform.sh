@@ -59,7 +59,7 @@ function package_install() {
 
 logo
 echo -e "${green}[+]${gray} Instalando paquetes necesarios...${end}"
-paquetes=(zsh lsd bat git lsb-release wget qemu-guest-agent)
+paquetes=(zsh lsd bat git wget unzip lsb-release)
 
 for paquete in "${paquetes[@]}"; do
     package_install $paquete
@@ -73,9 +73,8 @@ if [ ! -f /usr/share/zsh/plugins ]; then
 fi
 
 # descargando repositorio
-cd $HOME
 git clone https://github.com/boltercio/dots
-cd dots
+
 
 sudo apt install zsh zsh-autosuggestions zsh-syntax-highlighting -y &>/dev/null
 git clone https://github.com/zsh-users/zsh-history-substring-search.git &>/dev/null
@@ -84,13 +83,13 @@ sudo mv /usr/share/zsh-* /usr/share/zsh/plugins/
 
 # copiar directorios de configuracion
 echo -e "${green}[+]${gray} Copiando configuraciones.${end}"
-cp home/.zshrc $HOME/
+cp dots/home/.zshrc $HOME/
 if [ ! -f $HOME/.config ]; then 
     mkdir -p $HOME/.config
 fi
-cp -r home/.config/zsh $HOME/.config/
-cp -r home/.config/nvim $HOME/.config/
-cp -r home/.config/ranger $HOME/.config/
+cp -r dots/home/.config/zsh $HOME/.config/
+cp -r dots/home/.config/nvim $HOME/.config/
+cp -r dots/home/.config/ranger $HOME/.config/
 
 # Instalando fuentes
 echo -e "${green}[+]${gray} Instalando fuentes.${end}"
@@ -107,7 +106,7 @@ fc-cache -fv &>/dev/null
 # Instalando npm y neovim
 echo -e "${green}[+]${gray} Instalando Neovim...${end}"
 sudo apt install npm -y &>/dev/null
-cp -r home/.config/nvim $HOME/.config/
+cp -r dots/home/.config/nvim $HOME/.config/
 wget https://github.com/neovim/neovim/releases/download/nightly/nvim-linux-arm64.tar.gz &>/dev/null
 tar -zxf nvim-linux-arm64.tar.gz
 sudo mv nvim-linux-arm64 /opt/nvim
