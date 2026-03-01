@@ -122,18 +122,20 @@ rm -rf dots
 # Instalando cliente wazuh
 echo -e "${green}[+]${gray} Instalando agente de monitoreo wazuh.${end}"
 wget https://packages.wazuh.com/4.x/apt/pool/main/w/wazuh-agent/wazuh-agent_4.14.3-1_arm64.deb && sudo WAZUH_MANAGER='192.168.0.100' WAZUH_AGENT_NAME="$(hostname)" dpkg -i ./wazuh-agent_4.14.3-1_arm64.deb
-systemctl enable --now wazuh-agent
+sudo systemctl enable --now wazuh-agent
 
 # deshabilitando configuracion automatica de red
 echo -e "${green}[+]${gray} Parando configuracion automatica de red.${end}"
-systemctl stop systemd-networkd &>/dev/null
-systemctl disable systemd-networkd &>/dev/null
-systemctl mask systemd-networkd &>/dev/null
-systemctl enable networking
-systemctl start networking
+sudo systemctl stop systemd-networkd &>/dev/null
+sudo systemctl disable systemd-networkd &>/dev/null
+sudo systemctl mask systemd-networkd &>/dev/null
+sudo systemctl enable networking
+sudo systemctl start networking
 
 # Cambiando shell por defecto
 echo -e "${green}[+]${gray} Cambiando shell por defecto.${end}" 
 chsh -s $(which zsh)
 
-reboot 
+echo -e "${green}[+]${gray} Reiniciando equipo. presiona [Ctrl+C] para cancelar"
+sleep 10
+sudo reboot 
