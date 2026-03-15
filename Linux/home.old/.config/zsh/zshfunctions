@@ -1,0 +1,33 @@
+#!/usr/bin/bash
+
+### ---------- Basicos scripts ---------- ### 
+
+green="\e[0;32m\033[1m"           # Correct message
+red="\e[0;31m\033[1m"             # Failed message
+blue="\e[0;34m\033[1m"            # Normal message
+yellow="\e[0;33m\033[1m"          # Warning message
+purple="\e[0;35m\033[1m"          # Resalto de variable
+turquoise="\e[0;36m\033[1m"
+gray="\e[0;37m\033[1m"            # Color normal
+end="\033[0m\e[0m"                # Final de color
+
+
+
+function updateSystem () {
+    echo -e "${blue} [${yellow}⇅${blue}]${gray} comprobando si nala esta instalado..."
+    if which nala >/dev/null; then
+        sleep 1
+        echo -e "${blue} [${turquoise}i${blue}]${gray} Nala esta instalado, procediendo a actualizar el sistema..."
+        sudo nala update>/dev/null
+        sudo nala list --upgradable
+        sleep 3
+        sudo nala upgrade -y
+    else
+        sleep 1
+        echo -e "${blue}[${turquoise}i${blue}]${gray} Instalando nala desde apt"
+        sudo apt install nala -y
+        echo -e "${blue} [${turquoise}i${blue}]${gray} Nala ya esta instalado, ejecuta el script de nuevo!"
+        sleep 1
+        exit 0
+    fi
+}

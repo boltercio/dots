@@ -58,9 +58,15 @@ function package_install() {
 
 logo
 echo -e "${green}[+]${gray} Instalando paquetes necesarios... ${end}"
-paquetes=(zsh lsd bat curl wget acpi open-vm-tools open-vm-tools-desktop build-essential \
-feh rofi xclip xsel bspwm sxhkd polybar picom kitty ranger unzip locate acpi nala \
-ffmpeg 7zip jq poppler-utils fd-find ripgrep fzf zoxide imagemagick xdotool \
+paquetes=(bspwm polybar sxhkd alacritty brightnessctl dunst rofi jq policykit-1-gnome \ 
+git playerctl mpd ncmpcpp geany ranger mpc picom xdotool feh ueberzug maim pamixer libwebp-dev \
+xdg-user-dirs nala webp-pixbuf-loader zsh zsh-autosuggestions zsh-syntax-highlighting \
+thunar thunar-volman thunar-archive-plugin gvfs gvfs-backends engrampa tint2 dmenu xdo \
+jgmenu redshift xautolock fzf ytfzf yt-dlp gawk tumbler gpick neofetch xdg-utils python-is-python3 \
+python3-gi gir1.2-nm-1.0 duf libglib2.0-bin btop ncdu bat exa wmctrl acpid xclip scrot \
+acpi mpdris2 libplayerctl-dev gir1.2-playerctl-2.0 lxappearance bc \ 
+zsh lsd bat curl wget acpi open-vm-tools open-vm-tools-desktop build-essential \
+feh rofi xclip xsel  kitty unzip locate nala ffmpeg 7zip poppler-utils fd-find ripgrep zoxide imagemagick xdotool \
 xorg fastfetch wmname fonts-font-awesome fonts-firacode firefox-esr)
 
 for paquete in "${paquetes[@]}"; do
@@ -81,9 +87,11 @@ sudo mv /usr/share/zsh-* /usr/share/zsh/plugins/
 
 # copiar directorios de configuracion
 echo -e "${green}[+]${gray} Copiando configuraciones.${end}"
-cp -r home/* $HOME/
+cp -r config/* $HOME/.config/
+cp -r local/* $HOME/.local/
 cp -r home/.* $HOME/
 xdg-user-dirs-update &>/dev/null
+
 # Instalando fuentes
 echo -e "${green}[+]${gray} Instalando fuentes.${end}"
 fc-cache -fv &>/dev/null
@@ -97,6 +105,24 @@ tar -zxf nvim-linux-arm64.tar.gz
 sudo mv nvim-linux-arm64 /opt/nvim
 sudo ln -s /opt/nvim/bin/nvim /usr/bin/nvim
 rm -rf nvim-linux-arm64.tar.gz
+
+# Instalando eww
+echo -e "${green}[+]${gray} Instalando eww...${end}"
+eww_packages=(libgtk-3-dev libpangocairo-1.0-0 libcairo-gobject2 libglib2.0-dev libgdk-pixbuf2.0-dev libdbusmenu-gtk3-dev)
+for package in "${eww_packages[@]}"; do
+    package_install "$package"
+done
+git clone https://github.com/elkowar/eww.git &>/dev/null
+cd eww
+if $(dpkg -l | grep xorg); then
+    cargo build --release --no-default-features --features x11
+elif $(dpkg -l | grep wayland); then
+    cargo build --release --no-default-features --features wayland
+else
+    echo -e "${red}[!]${gray} No se detectó un servidor gráfico compatible (Xorg o Wayland).${end}"
+    exit 1
+fi 
+sudo cp target/release/eww /usr/local/bin/
 
 # Instalando sddm y tema personalizado
 echo -e "${green}[+]${gray} Instalando y configurando SDDM.${end}"
