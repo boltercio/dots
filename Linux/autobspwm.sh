@@ -59,7 +59,7 @@ function package_install() {
 logo
 echo -e "${green}[+]${gray} Instalando paquetes necesarios... ${end}"
 paquetes=(bspwm polybar sxhkd alacritty brightnessctl dunst rofi jq policykit-1-gnome \ 
-git playerctl mpd ncmpcpp geany ranger mpc picom xdotool feh ueberzug maim pamixer libwebp-dev \
+git playerctl mpd ncmpcpp geany mpc picom xdotool feh ueberzug maim pamixer libwebp-dev \
 xdg-user-dirs nala webp-pixbuf-loader zsh zsh-autosuggestions zsh-syntax-highlighting \
 thunar thunar-volman thunar-archive-plugin gvfs gvfs-backends engrampa tint2 dmenu xdo \
 jgmenu redshift xautolock fzf ytfzf yt-dlp gawk tumbler gpick neofetch xdg-utils python-is-python3 \
@@ -108,21 +108,23 @@ rm -rf nvim-linux-arm64.tar.gz
 
 # Instalando eww
 echo -e "${green}[+]${gray} Instalando eww...${end}"
-eww_packages=(libgtk-3-dev libpangocairo-1.0-0 libcairo-gobject2 libglib2.0-dev libgdk-pixbuf2.0-dev libdbusmenu-gtk3-dev)
+eww_packages=(cargo libgtk-3-dev libpangocairo-1.0-0 libcairo-gobject2 libglib2.0-dev libgdk-pixbuf2.0-dev libdbusmenu-gtk3-dev)
 for package in "${eww_packages[@]}"; do
     package_install "$package"
 done
 git clone https://github.com/elkowar/eww.git &>/dev/null
 cd eww
-if $(dpkg -l | grep xorg); then
-    cargo build --release --no-default-features --features x11
-elif $(dpkg -l | grep wayland); then
-    cargo build --release --no-default-features --features wayland
-else
-    echo -e "${red}[!]${gray} No se detectó un servidor gráfico compatible (Xorg o Wayland).${end}"
-    exit 1
-fi 
+cargo build --release --no-default-features --features x11
 sudo cp target/release/eww /usr/local/bin/
+sudo chmod +x /usr/local/bin/eww
+
+# Instalando yazi
+git clone https://github.com/sxyazi/yazi.git
+cd yazi
+cargo build --release --locked
+sudo mv target/release/yazi /target/release/ya /usr/local/bin/
+sudo chmod +x /usr/local/bin/yazi
+sudo chmod +x /usr/local/bin/ya
 
 # Instalando sddm y tema personalizado
 echo -e "${green}[+]${gray} Instalando y configurando SDDM.${end}"

@@ -1,3 +1,0 @@
-#!/bin/bash
-
-xtitle -s | stdbuf -oL -eL uniq | cat
