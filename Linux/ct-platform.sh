@@ -88,7 +88,6 @@ if [ ! -f $HOME/.config ]; then
 fi
 cp -r dots/Linux/config/zsh $HOME/.config/
 cp -r dots/Linux/config/nvim $HOME/.config/
-cp -r dots/Linux/config/ranger $HOME/.config/
 
 # Instalando fuentes
 echo -e "${green}[+]${gray} Instalando fuentes.${end}"
@@ -107,7 +106,7 @@ fc-cache -fv &>/dev/null
 # Instalando npm y neovim
 echo -e "${green}[+]${gray} Instalando Neovim...${end}"
 sudo apt install npm -y &>/dev/null
-cp -r dots/Linux/home/.config/nvim $HOME/.config/
+cp -r dots/Linux/config/nvim $HOME/.config/
 wget https://github.com/neovim/neovim/releases/download/nightly/nvim-linux-arm64.tar.gz &>/dev/null
 tar -zxf nvim-linux-arm64.tar.gz
 sudo mv nvim-linux-arm64 /opt/nvim
