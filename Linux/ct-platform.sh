@@ -86,9 +86,9 @@ cp dots/Linux/home/.zshrc-ct $HOME/.zshrc
 if [ ! -f $HOME/.config ]; then 
     mkdir -p $HOME/.config
 fi
-cp -r dots/Linux/home/.config/zsh $HOME/.config/
-cp -r dots/Linux/home/.config/nvim $HOME/.config/
-cp -r dots/Linux/home/.config/ranger $HOME/.config/
+cp -r dots/Linux/config/zsh $HOME/.config/
+cp -r dots/Linux/config/nvim $HOME/.config/
+cp -r dots/Linux/config/ranger $HOME/.config/
 
 # Instalando fuentes
 echo -e "${green}[+]${gray} Instalando fuentes.${end}"
@@ -119,9 +119,11 @@ cd $HOME
 rm -rf dots
 
 # Instalando cliente wazuh
-echo -e "${green}[+]${gray} Instalando agente de monitoreo wazuh.${end}"
-wget https://packages.wazuh.com/4.x/apt/pool/main/w/wazuh-agent/wazuh-agent_4.14.3-1_arm64.deb && sudo WAZUH_MANAGER='192.168.0.100' WAZUH_AGENT_NAME="$(hostname)" dpkg -i ./wazuh-agent_4.14.3-1_arm64.deb
-sudo systemctl enable --now wazuh-agent
+if [ ! $(dpkg -l | grep wazuh) ]; then
+    echo -e "${green}[+]${gray} Instalando agente de monitoreo wazuh.${end}"
+    wget https://packages.wazuh.com/4.x/apt/pool/main/w/wazuh-agent/wazuh-agent_4.14.3-1_arm64.deb && sudo WAZUH_MANAGER='192.168.0.100' WAZUH_AGENT_NAME="$(hostname)" dpkg -i ./wazuh-agent_4.14.3-1_arm64.deb
+    sudo systemctl enable --now wazuh-agent
+fi
 
 # deshabilitando configuracion automatica de red
 echo -e "${green}[+]${gray} Parando configuracion automatica de red.${end}"
