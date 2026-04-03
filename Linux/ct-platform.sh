@@ -59,7 +59,7 @@ function package_install() {
 
 logo
 echo -e "${green}[+]${gray} Instalando paquetes necesarios...${end}"
-paquetes=(zsh lsd bat git wget unzip lsb-release)
+paquetes=(zsh lsd bat git wget unzip lsb-release python3)
 
 for paquete in "${paquetes[@]}"; do
     package_install $paquete
