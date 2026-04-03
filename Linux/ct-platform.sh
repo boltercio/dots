@@ -75,7 +75,6 @@ fi
 # descargando repositorio
 git clone https://github.com/boltercio/dots
 
-
 sudo apt install zsh zsh-autosuggestions zsh-syntax-highlighting -y &>/dev/null
 git clone https://github.com/zsh-users/zsh-history-substring-search.git &>/dev/null
 sudo mv zsh-* /usr/share/zsh/plugins/
@@ -83,7 +82,7 @@ sudo mv /usr/share/zsh-* /usr/share/zsh/plugins/
 
 # copiar directorios de configuracion
 echo -e "${green}[+]${gray} Copiando configuraciones.${end}"
-cp dots/Linux/home/.zshrc $HOME/
+cp dots/Linux/home/.zshrc-ct $HOME/.zshrc
 if [ ! -f $HOME/.config ]; then 
     mkdir -p $HOME/.config
 fi
