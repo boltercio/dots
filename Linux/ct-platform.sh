@@ -118,8 +118,8 @@ cd $HOME
 rm -rf dots
 
 # Instalando cliente wazuh
-dpkg -l | grep wazuh &>/dev/null
-if [ $? != "0" ]; then
+wazuh_installed=$(dpkg -l | grep wazuh | awk '{print $1}')
+if [ $wazuh_installed != "ii" ]; then
     echo -e "${green}[+]${gray} Instalando agente de monitoreo wazuh.${end}"
     wget https://packages.wazuh.com/4.x/apt/pool/main/w/wazuh-agent/wazuh-agent_4.14.3-1_arm64.deb && sudo WAZUH_MANAGER='192.168.0.100' WAZUH_AGENT_NAME="$(hostname)" dpkg -i ./wazuh-agent_4.14.3-1_arm64.deb
     sudo systemctl enable --now wazuh-agent
