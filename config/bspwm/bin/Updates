@@ -1,17 +1,17 @@
 #!/bin/sh
 # =============================================================
-# Author: gh0stzk
+# Author: gh0stzk (Modified for Debian/Nala)
 # Repo:   https://github.com/gh0stzk/dotfiles
 # Date:   06.04.2025 09:41:28
 #
-# ArchUpdates - Script to check for new updates in ARCH and AUR
-#               and sync updates module in polybar/Eww.
+# DebianUpdates - Script to check for new updates in Debian
+#                 and sync updates module in polybar/Eww.
 # Features:
 #   ✔ Shows the number of updates available in polybar/eww
-#   ✔ Used in a pacman hook to update the polybar-module/eww-poll. --sync-polybar
+#   ✔ Used with nala to update the polybar-module/eww-poll. --sync-polybar
 #
 # Dependencies:
-#   → pacman-contrib, paru, polybar
+#   → nala, polybar
 #
 # Copyright (C) 2021-2025 gh0stzk <z0mbi3.zk@protonmail.com>
 # Licensed under GPL-3.0 license
@@ -21,20 +21,13 @@ UPDATE_FILE="${XDG_CACHE_HOME:-$HOME/.cache}/Updates.txt"
 
 # Main verification function
 check_updates() {
-    # Get official updates
-    official=0
-    if updates=$(checkupdates 2>/dev/null); then
-        official=$(echo "$updates" | wc -l)
+    # Get available updates using nala
+    total=0
+    if updates=$(nala list --upgradable 2>/dev/null | grep -v "^$"); then
+        total=$(echo "$updates" | wc -l)
     fi
 
-    # Get AUR updates
-    aur=0
-    if aur_updates=$(paru -Qua 2>/dev/null); then
-        aur=$(echo "$aur_updates" | wc -l)
-    fi
-
-    # Calculate and write the total to the file
-    total=$((official + aur))
+    # Write the total to the file
     echo "$total" > "$UPDATE_FILE"
 
     # Sends the signal to polybar-module/eww-poll to update the data.
@@ -46,19 +39,15 @@ check_updates() {
     fi
 }
 
+
 list_updates() {
     check_updates
     if [ "$total" -gt 0 ]; then
         printf "\033[1m\033[33mThere are %s updates available:\033[0m\n" "$total"
 
         if [ -n "$updates" ]; then
-            printf "\n\033[1m\033[34mOfficial updates:\033[0m\n"
-            printf "%s\n" "$updates" | sed 's/->/\x1b[32;1m\x1b[0m/g'
-        fi
-
-        if [ -n "$aur_updates" ]; then
-            printf "\n\033[1m\033[34mAUR updates:\033[0m\n"
-            printf "%s\n" "$aur_updates" | sed 's/->/\x1b[32;1m\x1b[0m/g'
+            printf "\n\033[1m\033[34mAvailable updates:\033[0m\n"
+            printf "%s\n" "$updates" | sed 's/ /\x1b[32;1m \x1b[0m/g'
         fi
     else
         printf "\033[1m\033[32m¡Your system is already updated!\033[0m\n"
