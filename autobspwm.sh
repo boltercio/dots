@@ -61,9 +61,9 @@ echo -e "${green}[+]${gray} Instalando paquetes necesarios... ${end}"
 paquetes=(bspwm polybar sxhkd alacritty brightnessctl dunst rofi jq gnome-keyring libsecret-1-0 seahorse \ 
 playerctl mpd ncmpcpp geany mpc picom xdotool feh ueberzug maim pamixer libwebp-dev \
 xdg-user-dirs nala webp-pixbuf-loader zsh zsh-autosuggestions zsh-syntax-highlighting \
-thunar thunar-volman thunar-archive-plugin gvfs gvfs-backends engrampa tint2 dmenu xdo \
-jgmenu redshift xautolock fzf ytfzf yt-dlp gawk tumbler gpick xdg-utils python-is-python3 \
-python3-gi gir1.2-nm-1.0 duf libglib2.0-bin ncdu bat exa wmctrl acpid xclip scrot \
+thunar thunar-volman thunar-archive-plugin gvfs gvfs-backends engrampa dmenu xdo \
+jgmenu redshift fzf ytfzf yt-dlp gawk tumbler gpick xdg-utils python-is-python3 \
+python3-gi gir1.2-nm-1.0 duf libglib2.0-bin ncdu bat eza wmctrl acpid xclip scrot \
 acpi mpdris2 libplayerctl-dev gir1.2-playerctl-2.0 lxappearance bc pavucontrol \ 
 curl wget open-vm-tools open-vm-tools-desktop build-essential \
 xsel kitty unzip locate ffmpeg 7zip poppler-utils fd-find ripgrep zoxide imagemagick \
@@ -84,6 +84,10 @@ sudo apt install zsh zsh-autosuggestions zsh-syntax-highlighting -qq -y &>/dev/n
 git clone https://github.com/zsh-users/zsh-history-substring-search.git &>/dev/null
 sudo mv zsh-* /usr/share/zsh/plugins/
 sudo mv /usr/share/zsh-* /usr/share/zsh/plugins/
+if [ -d zsh-history-substring-search ]; then
+    rm -rf zsh-history-substring-search
+fi
+sleep 2
 
 # copiar directorios de configuracion
 echo -e "${green}[+]${gray} Copiando configuraciones.${end}"
@@ -97,156 +101,164 @@ echo -e "${green}[+]${gray} Instalando fuentes.${end}"
 fc-cache -fv &>/dev/null
 
 # Instalando npm y neovim
-echo -e "${green}[+]${gray} Instalando Neovim...${end}"
-sudo apt install --no-install-recommends npm -y &>/dev/null
-cp -r home/.config/nvim $HOME/.config/
-wget https://github.com/neovim/neovim/releases/download/nightly/nvim-linux-arm64.tar.gz &>/dev/null
-tar -zxf nvim-linux-arm64.tar.gz
-sudo mv nvim-linux-arm64 /opt/nvim
-sudo ln -s /opt/nvim/bin/nvim /usr/bin/nvim
-rm -rf nvim-linux-arm64.tar.gz
+if ! command -v nvim; then
+    echo -e "${green}[+]${gray} Instalando Neovim...${end}"
+    sudo apt install --no-install-recommends npm -y &>/dev/null
+    cp -r home/.config/nvim $HOME/.config/
+    wget https://github.com/neovim/neovim/releases/download/nightly/nvim-linux-arm64.tar.gz &>/dev/null
+    tar -zxf nvim-linux-arm64.tar.gz
+    sudo mv nvim-linux-arm64 /opt/nvim
+    sudo ln -s /opt/nvim/bin/nvim /usr/bin/nvim
+    rm -rf nvim-linux-arm64.tar.gz
+fi
 
 # Instalando rust y herramientas relacionadas
-echo -e "${green}[+]${gray} Instalando rust...${end}"
-curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y &>/dev/null
-source $HOME/.cargo/env
+if [ ! -d $HOME/.cargo ]; then
+    echo -e "${green}[+]${gray} Instalando rust...${end}"
+    curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y &>/dev/null
+    source $HOME/.cargo/env
+fi
 
 # Instalando eww
-echo -e "${green}[+]${gray} Instalando eww...${end}"
-eww_packages=(libgtk-3-dev libpangocairo-1.0-0 libcairo-gobject2 libglib2.0-dev libgdk-pixbuf-2.0-dev libdbusmenu-gtk3-dev)
-for package in "${eww_packages[@]}"; do
-    package_install "$package"
-done
-git clone https://github.com/elkowar/eww.git &>/dev/null
-cd eww
-cargo build --release --no-default-features --features x11
-sudo cp target/release/eww /usr/local/bin/
-sudo chmod +x /usr/local/bin/eww
-cd ..
-rm -rf eww
+if ! command -v eww; then
+    echo -e "${green}[+]${gray} Instalando eww...${end}"
+    eww_packages=(libgtk-3-dev libpangocairo-1.0-0 libcairo-gobject2 libglib2.0-dev libgdk-pixbuf-2.0-dev libdbusmenu-gtk3-dev)
+    for package in "${eww_packages[@]}"; do
+        package_install "$package"
+    done
+    git clone https://github.com/elkowar/eww.git &>/dev/null
+    cd eww
+    cargo build --release --no-default-features --features x11
+    sudo cp target/release/eww /usr/local/bin/
+    sudo chmod +x /usr/local/bin/eww
+    cd ..
+    rm -rf eww
+fi 
 
 # Instalando yazi
-echo -e "${green}[+]${gray} Instalando yazi...${end}"
-git clone https://github.com/sxyazi/yazi.git &>/dev/null
-cd yazi
-cargo build --release --locked 
-sudo mv target/release/yazi /target/release/ya /usr/local/bin/
-sudo chmod +x /usr/local/bin/yazi
-sudo chmod +x /usr/local/bin/ya
-cd ..
-rm -rf yazi
+if ! command -v yazi; then
+    echo -e "${green}[+]${gray} Instalando yazi...${end}"
+    git clone https://github.com/sxyazi/yazi.git &>/dev/null
+    cd yazi
+    cargo build --release --locked 
+    sudo mv target/release/yazi /target/release/ya /usr/local/bin/
+    sudo chmod +x /usr/local/bin/yazi
+    sudo chmod +x /usr/local/bin/ya
+    cd ..
+    rm -rf yazi
+fi
 
 # Instalando sddm y tema personalizado
-echo -e "${green}[+]${gray} Instalando y configurando SDDM.${end}"
-sddm=( sddm libqt6svg6 qt6-declarative-dev qt6-svg-dev qt6-virtualkeyboard-plugin libqt6multimedia6 qml6-module-qtquick-controls qml6-module-qtquick-effects )
-for PKG1 in "${sddm[@]}" ; do
-  sudo apt install --no-install-recommends -y "$PKG1" &>/dev/null
-done
-source_theme="https://github.com/JaKooLit/simple-sddm-2.git"
-theme_name="simple_sddm_2"
+if ! command -v sddm &>/dev/null; then
 
-# Check if /usr/share/sddm/themes/$theme_name exists and remove if it does
-if [ -d "/usr/share/sddm/themes/$theme_name" ]; then
-  sudo rm -rf "/usr/share/sddm/themes/$theme_name"
-  echo -e "\e[1A\e[K${OK} - Removed existing $theme_name directory." 
-fi
+    echo -e "${green}[+]${gray} Instalando y configurando SDDM.${end}"
+    sddm=( sddm libqt6svg6 qt6-declarative-dev qt6-svg-dev qt6-virtualkeyboard-plugin libqt6multimedia6 qml6-module-qtquick-controls qml6-module-qtquick-effects )
+    for PKG1 in "${sddm[@]}" ; do
+    sudo apt install --no-install-recommends -y "$PKG1" &>/dev/null
+    done
+    source_theme="https://github.com/JaKooLit/simple-sddm-2.git"
+    theme_name="simple_sddm_2"
 
-# Check if $theme_name directory exists in the current directory and remove if it does
-if [ -d "$theme_name" ]; then
-  rm -rf "$theme_name"
-  echo -e "\e[1A\e[K${OK} - Removed existing $theme_name directory from the current location." 
-fi
-
-# Clone the repository
-function install_sddm_theme() {
-    if git clone --depth=1 "$source_theme" "$theme_name"; then
-    if [ ! -d "$theme_name" ]; then
-        echo "${ERROR} Failed to clone the repository." 
+    # Check if /usr/share/sddm/themes/$theme_name exists and remove if it does
+    if [ -d "/usr/share/sddm/themes/$theme_name" ]; then
+    sudo rm -rf "/usr/share/sddm/themes/$theme_name"
+    echo -e "\e[1A\e[K${OK} - Removed existing $theme_name directory." 
     fi
 
-    # Create themes directory if it doesn't exist
-    if [ ! -d "/usr/share/sddm/themes" ]; then
-        sudo mkdir -p /usr/share/sddm/themes
-        echo "${OK} - Directory '/usr/share/sddm/themes' created." 
+    # Check if $theme_name directory exists in the current directory and remove if it does
+    if [ -d "$theme_name" ]; then
+    rm -rf "$theme_name"
+    echo -e "\e[1A\e[K${OK} - Removed existing $theme_name directory from the current location." 
     fi
 
-    # Move cloned theme to the themes directory
-    sudo mv "$theme_name" "/usr/share/sddm/themes/$theme_name" 
+    # Clone the repository
+    function install_sddm_theme() {
+        if git clone --depth=1 "$source_theme" "$theme_name"; then
+        if [ ! -d "$theme_name" ]; then
+            echo "${ERROR} Failed to clone the repository." 
+        fi
 
-    # setting up SDDM theme
-    sddm_conf="/etc/sddm.conf"
-    BACKUP_SUFFIX=".bak"
+        # Create themes directory if it doesn't exist
+        if [ ! -d "/usr/share/sddm/themes" ]; then
+            sudo mkdir -p /usr/share/sddm/themes
+            echo "${OK} - Directory '/usr/share/sddm/themes' created." 
+        fi
 
-    echo -e "${NOTE} Setting up the login screen." 
+        # Move cloned theme to the themes directory
+        sudo mv "$theme_name" "/usr/share/sddm/themes/$theme_name" 
 
-    # Backup the sddm.conf file if it exists
-    if [ -f "$sddm_conf" ]; then
-        echo "Backing up $sddm_conf" 
-        sudo cp "$sddm_conf" "$sddm_conf$BACKUP_SUFFIX" 
-    else
-        echo "$sddm_conf does not exist, creating a new one." 
-        sudo touch "$sddm_conf" 
-    fi
+        # setting up SDDM theme
+        sddm_conf="/etc/sddm.conf"
+        BACKUP_SUFFIX=".bak"
 
-    # Check if the [Theme] section exists
-    if grep -q '^\[Theme\]' "$sddm_conf"; then
-        # Update the Current= line under [Theme]
-        sudo sed -i "/^\[Theme\]/,/^\[/{s/^\s*Current=.*/Current=$theme_name/}" "$sddm_conf" 
+        echo -e "${NOTE} Setting up the login screen." 
+
+        # Backup the sddm.conf file if it exists
+        if [ -f "$sddm_conf" ]; then
+            echo "Backing up $sddm_conf" 
+            sudo cp "$sddm_conf" "$sddm_conf$BACKUP_SUFFIX" 
+        else
+            echo "$sddm_conf does not exist, creating a new one." 
+            sudo touch "$sddm_conf" 
+        fi
+
+        # Check if the [Theme] section exists
+        if grep -q '^\[Theme\]' "$sddm_conf"; then
+            # Update the Current= line under [Theme]
+            sudo sed -i "/^\[Theme\]/,/^\[/{s/^\s*Current=.*/Current=$theme_name/}" "$sddm_conf" 
+            
+            # If no Current= line was found and replaced, append it after the [Theme] section
+            if ! grep -q '^\s*Current=' "$sddm_conf"; then
+                sudo sed -i "/^\[Theme\]/a Current=$theme_name" "$sddm_conf" 
+                echo "Appended Current=$theme_name under [Theme] in $sddm_conf" 
+            else
+                echo "Updated Current=$theme_name in $sddm_conf" 
+            fi
+        else
+            # Append the [Theme] section at the end if it doesn't exist
+            echo -e "\n[Theme]\nCurrent=$theme_name" | sudo tee -a "$sddm_conf" > /dev/null
+            echo "Added [Theme] section with Current=$theme_name in $sddm_conf" 
+        fi
+
+        # Add [General] section with InputMethod=qtvirtualkeyboard if it doesn't exist
+        if ! grep -q '^\[General\]' "$sddm_conf"; then
+            echo -e "\n[General]\nInputMethod=qtvirtualkeyboard" | sudo tee -a "$sddm_conf" > /dev/null
+            echo "Added [General] section with InputMethod=qtvirtualkeyboard in $sddm_conf" 
+        else
+            # Update InputMethod line if section exists
+            if grep -q '^\s*InputMethod=' "$sddm_conf"; then
+            sudo sed -i '/^\[General\]/,/^\[/{s/^\s*InputMethod=.*/InputMethod=qtvirtualkeyboard/}' "$sddm_conf" 
+            echo "Updated InputMethod to qtvirtualkeyboard in $sddm_conf" 
+            else
+            sudo sed -i '/^\[General\]/a InputMethod=qtvirtualkeyboard' "$sddm_conf" 
+            echo "Appended InputMethod=qtvirtualkeyboard under [General] in $sddm_conf" 
+            fi
+        fi
+
+        # Replace current background from assets
+        sudo cp -r assets/sddm.png "/usr/share/sddm/themes/$theme_name/Backgrounds/default" 
+        sudo sed -i 's|^wallpaper=".*"|wallpaper="Backgrounds/default"|' "/usr/share/sddm/themes/$theme_name/theme.conf" 
         
-        # If no Current= line was found and replaced, append it after the [Theme] section
-        if ! grep -q '^\s*Current=' "$sddm_conf"; then
-            sudo sed -i "/^\[Theme\]/a Current=$theme_name" "$sddm_conf" 
-            echo "Appended Current=$theme_name under [Theme] in $sddm_conf" 
+        printf "\n%.0s" {1..1}
+
+        echo "${OK} - ${MAGENTA}Additional ${YELLOW}$theme_name SDDM Theme${RESET} successfully installed." 
+
         else
-            echo "Updated Current=$theme_name in $sddm_conf" 
+
+        echo "${ERROR} - Failed to clone the sddm theme repository. Please check your internet connection." 
         fi
-    else
-        # Append the [Theme] section at the end if it doesn't exist
-        echo -e "\n[Theme]\nCurrent=$theme_name" | sudo tee -a "$sddm_conf" > /dev/null
-        echo "Added [Theme] section with Current=$theme_name in $sddm_conf" 
-    fi
+    }
 
-    # Add [General] section with InputMethod=qtvirtualkeyboard if it doesn't exist
-    if ! grep -q '^\[General\]' "$sddm_conf"; then
-        echo -e "\n[General]\nInputMethod=qtvirtualkeyboard" | sudo tee -a "$sddm_conf" > /dev/null
-        echo "Added [General] section with InputMethod=qtvirtualkeyboard in $sddm_conf" 
-    else
-        # Update InputMethod line if section exists
-        if grep -q '^\s*InputMethod=' "$sddm_conf"; then
-        sudo sed -i '/^\[General\]/,/^\[/{s/^\s*InputMethod=.*/InputMethod=qtvirtualkeyboard/}' "$sddm_conf" 
-        echo "Updated InputMethod to qtvirtualkeyboard in $sddm_conf" 
-        else
-        sudo sed -i '/^\[General\]/a InputMethod=qtvirtualkeyboard' "$sddm_conf" 
-        echo "Appended InputMethod=qtvirtualkeyboard under [General] in $sddm_conf" 
-        fi
-    fi
-
-    # Replace current background from assets
-    sudo cp -r assets/sddm.png "/usr/share/sddm/themes/$theme_name/Backgrounds/default" 
-    sudo sed -i 's|^wallpaper=".*"|wallpaper="Backgrounds/default"|' "/usr/share/sddm/themes/$theme_name/theme.conf" 
-    
-    printf "\n%.0s" {1..1}
-
-    echo "${OK} - ${MAGENTA}Additional ${YELLOW}$theme_name SDDM Theme${RESET} successfully installed." 
-
-    else
-
-    echo "${ERROR} - Failed to clone the sddm theme repository. Please check your internet connection." 
-    fi
-}
-
-install_sddm_theme
-sudo systemctl enable sddm &>/dev/null
-sleep 2
+    install_sddm_theme
+    sudo systemctl enable sddm &>/dev/null
+    sleep 2
+fi
 
 # Configurando permisos
 logo
 echo -e "${green}[+]${gray} Configurando permisos de scripts.${end}"
 chmod +x $HOME/.config/bspwm/bspwmrc
 chmod +x $HOME/.config/sxhkd/sxhkdrc
-chmod +x $HOME/.config/polybar/launch.sh
-chmod +x $HOME/.config/polybar/cuts/launch.sh
-chmod +x $HOME/.config/polybar/cuts/scripts/*
 sleep 2
 
 # Configurando tema de grub
