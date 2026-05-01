@@ -58,14 +58,14 @@ function package_install() {
 
 logo
 echo -e "${green}[+]${gray} Instalando paquetes necesarios... ${end}"
-paquetes=(bspwm polybar sxhkd alacritty brightnessctl dunst rofi jq gnome-keyring libsecret-1-0 seahorse \ 
+paquetes=(bspwm polybar sxhkd alacritty brightnessctl dunst rofi jq gnome-keyring libsecret-1-0 seahorse \
 playerctl mpd ncmpcpp geany mpc picom xdotool feh ueberzug maim pamixer libwebp-dev \
 xdg-user-dirs nala webp-pixbuf-loader zsh zsh-autosuggestions zsh-syntax-highlighting \
 thunar thunar-volman thunar-archive-plugin gvfs gvfs-backends engrampa dmenu xdo \
 jgmenu redshift fzf ytfzf yt-dlp gawk tumbler gpick xdg-utils python-is-python3 \
 python3-gi gir1.2-nm-1.0 duf libglib2.0-bin ncdu bat eza wmctrl acpid xclip scrot \
-acpi mpdris2 libplayerctl-dev gir1.2-playerctl-2.0 lxappearance bc pavucontrol \ 
-curl wget open-vm-tools open-vm-tools-desktop build-essential \
+acpi mpdris2 libplayerctl-dev gir1.2-playerctl-2.0 lxappearance bc pavucontrol \
+curl wget open-vm-tools open-vm-tools-desktop build-essential network-manager \
 xsel kitty unzip locate ffmpeg 7zip poppler-utils fd-find ripgrep zoxide imagemagick \
 xorg fastfetch wmname fonts-font-awesome fonts-firacode firefox-esr)
 

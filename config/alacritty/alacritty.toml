@@ -30,7 +30,7 @@ save_to_clipboard = true
 [window]
 decorations = "none"
 dynamic_title = true
-opacity = 1.0
+opacity = 0.90
 padding = { x = 15, y = 15 }
 dynamic_padding = true
 resize_increments = true

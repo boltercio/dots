@@ -25,7 +25,6 @@ read -r MY_TERM < "$CFG_TERM"
 choose_terminal() {
     # Terminal List
     terminals="Alacritty
-St
 Kitty"
 
     current_term=$(tr '[:upper:]' '[:lower:]' < "$CFG_TERM")
@@ -76,7 +75,7 @@ case $MY_TERM in
 	case $1 in
 	    "--terminal") alacritty ;;
 	    "--floating") alacritty --class FloaTerm,FloaTerm ;;
-	    "--update") alacritty --hold --class FloaTerm,FloaTerm -e paru -Syu --nocombinedupgrade ;;
+	    "--update") alacritty --hold --class FloaTerm,FloaTerm -e nala update;;
 	    "--checkupdates") alacritty --hold --class Updating,Updating -e Updates --print-updates ;;
 	    "--yazi") alacritty --class FloaTerm,YaziTerm -e yazi ;;
 	    "--nvim") alacritty -e nvim ;;
