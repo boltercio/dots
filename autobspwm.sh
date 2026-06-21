@@ -104,6 +104,7 @@ Package: firefox*
 Pin: release o=Ubuntu
 Pin-Priority: -1
 ' | sudo tee /etc/apt/preferences.d/mozilla-firefox > /dev/null
+sudo apt update &>/dev/null
 package_install "firefox"
 
 # copiar directorios de configuracion
