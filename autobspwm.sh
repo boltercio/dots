@@ -89,8 +89,30 @@ if [ -d zsh-history-substring-search ]; then
 fi
 sleep 2
 
+# Instalando firefox sin snap
+echo -e "${green}[+]${gray} Instalando firefox.${end}"
+sudo snap remove firefox &>/dev/null
+sudo install -d -m 0755 /etc/apt/keyrings > /dev/null
+wget -q https://packages.mozilla.org/apt/repo-signing-key.gpg -O - | sudo tee /etc/apt/keyrings/packages.mozilla.org.asc > /dev/null
+echo "deb [signed-by=/etc/apt/keyrings/packages.mozilla.org.asc] https://packages.mozilla.org/apt mozilla main" | sudo tee /etc/apt/sources.list.d/mozilla.list > /dev/null
+echo '
+Package: firefox
+Pin: origin packages.mozilla.org
+Pin-Priority: 1000
+
+Package: firefox*
+Pin: release o=Ubuntu
+Pin-Priority: -1
+' | sudo tee /etc/apt/preferences.d/mozilla-firefox > /dev/null
+sudo apt update > /dev/null
+sudo apt install firefox > /dev/null
+
+
 # copiar directorios de configuracion
 echo -e "${green}[+]${gray} Copiando configuraciones.${end}"
+if [ ! -d $HOME/.config ]; then
+    mkdir $HOME/.config
+fi
 cp -r config/* $HOME/.config/
 cp -r local/* $HOME/.local/
 cp -r home/.* $HOME/
