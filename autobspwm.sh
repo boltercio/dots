@@ -104,9 +104,7 @@ Package: firefox*
 Pin: release o=Ubuntu
 Pin-Priority: -1
 ' | sudo tee /etc/apt/preferences.d/mozilla-firefox > /dev/null
-sudo apt update > /dev/null
-sudo apt install firefox > /dev/null
-
+package_install "firefox"
 
 # copiar directorios de configuracion
 echo -e "${green}[+]${gray} Copiando configuraciones.${end}"
@@ -126,7 +124,7 @@ fc-cache -fv &>/dev/null
 if ! command -v nvim; then
     echo -e "${green}[+]${gray} Instalando Neovim...${end}"
     sudo apt install --no-install-recommends npm -y &>/dev/null
-    cp -r home/.config/nvim $HOME/.config/
+    cp -r config/nvim $HOME/.config/
     wget https://github.com/neovim/neovim/releases/download/nightly/nvim-linux-arm64.tar.gz &>/dev/null
     tar -zxf nvim-linux-arm64.tar.gz
     sudo mv nvim-linux-arm64 /opt/nvim
