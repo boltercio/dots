@@ -67,7 +67,7 @@ python3-gi gir1.2-nm-1.0 duf libglib2.0-bin ncdu bat eza wmctrl acpid xclip scro
 acpi mpdris2 libplayerctl-dev gir1.2-playerctl-2.0 lxappearance bc pavucontrol \
 curl wget open-vm-tools open-vm-tools-desktop build-essential network-manager \
 xsel kitty unzip locate ffmpeg 7zip poppler-utils fd-find ripgrep zoxide imagemagick \
-xorg fastfetch wmname fonts-font-awesome fonts-firacode firefox-esr)
+xorg fastfetch wmname fonts-font-awesome fonts-firacode gnome-themes-extra gnome-themes-ubuntu )
 
 for paquete in "${paquetes[@]}"; do
     package_install "$paquete"
