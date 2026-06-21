@@ -119,6 +119,15 @@ xdg-user-dirs-update &>/dev/null
 
 # Instalando fuentes
 echo -e "${green}[+]${gray} Instalando fuentes.${end}"
+wget https://github.com/ryanoasis/nerd-fonts/releases/download/v3.4.0/CascadiaMono.zip &>/dev/null
+wget https://github.com/ryanoasis/nerd-fonts/releases/download/v3.4.0/FiraCode.zip &>/dev/null
+wget https://github.com/ryanoasis/nerd-fonts/releases/download/v3.4.0/Hack.zip &>/dev/null
+wget https://github.com/ryanoasis/nerd-fonts/releases/download/v3.4.0/Iosevka.zip &>/dev/null
+wget https://github.com/ryanoasis/nerd-fonts/releases/download/v3.4.0/JetBrainsMono.zip &>/dev/null
+for font in CascadiaMono FiraCode Hack Iosevka JetBrainsMono; do
+    unzip -o "$font.zip" -d "$HOME/.local/share/fonts" &>/dev/null
+    rm -f "$font.zip"
+done
 fc-cache -fv &>/dev/null
 
 # Instalando npm y neovim
