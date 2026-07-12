@@ -59,7 +59,7 @@ function package_install() {
 
 logo
 echo -e "${green}[+]${gray} Instalando paquetes necesarios...${end}"
-paquetes=(zsh lsd bat git wget unzip lsb-release python3)
+paquetes=(zsh eza bat git wget unzip lsb-release python3)
 
 for paquete in "${paquetes[@]}"; do
     package_install $paquete
@@ -82,12 +82,12 @@ sudo mv /usr/share/zsh-* /usr/share/zsh/plugins/
 
 # copiar directorios de configuracion
 echo -e "${green}[+]${gray} Copiando configuraciones.${end}"
-cp dots/Linux/home/.zshrc-ct $HOME/.zshrc
+cp home/.zshrc-ct $HOME/.zshrc
 if [ ! -f $HOME/.config ]; then 
     mkdir -p $HOME/.config
 fi
-cp -r dots/Linux/config/zsh $HOME/.config/
-cp -r dots/Linux/config/nvim $HOME/.config/
+cp -r config/zsh $HOME/.config/
+cp -r config/nvim $HOME/.config/
 
 # Instalando fuentes
 echo -e "${green}[+]${gray} Instalando fuentes.${end}"
@@ -106,24 +106,26 @@ fc-cache -fv &>/dev/null
 # Instalando npm y neovim
 echo -e "${green}[+]${gray} Instalando Neovim...${end}"
 sudo apt install npm -y &>/dev/null
-cp -r dots/Linux/config/nvim $HOME/.config/
+cp -r config/nvim $HOME/.config/
 wget https://github.com/neovim/neovim/releases/download/nightly/nvim-linux-arm64.tar.gz &>/dev/null
 tar -zxf nvim-linux-arm64.tar.gz
 sudo mv nvim-linux-arm64 /opt/nvim
 sudo ln -s /opt/nvim/bin/nvim /usr/bin/nvim
 rm -rf nvim-linux-arm64.tar.gz
 
-echo -e "${green}[+]${gray} Eliminando repositorio descargado.${end}"
-cd $HOME
-rm -rf dots
-
-# Instalando cliente wazuh
-wazuh_installed=$(dpkg -l | grep wazuh | awk '{print $1}')
-if [ $wazuh_installed != "ii" ]; then
-    echo -e "${green}[+]${gray} Instalando agente de monitoreo wazuh.${end}"
-    wget https://packages.wazuh.com/4.x/apt/pool/main/w/wazuh-agent/wazuh-agent_4.14.3-1_arm64.deb && sudo WAZUH_MANAGER='192.168.0.100' WAZUH_AGENT_NAME="$(hostname)" dpkg -i ./wazuh-agent_4.14.3-1_arm64.deb
-    sudo systemctl enable --now wazuh-agent
-fi
+echo -e "${yellow}[!]${gray} Quieres eliminar el respositorio descargado?? ${turquoise}[Y/n]${end}"
+read option
+case $option in
+    Y|y)
+        echo -e "${green}[+]${gray} Eliminando repositorio descargado.${end}"
+        cd $HOME
+        rm -rf dots ;;
+    N|n)
+	echo -e "${green}[+]${gray} No se ha eliminado el repositorio...${end}"
+	sleep 2 ;;
+    *)
+	echo -e "${yellow}[!]${gray} Opcion no valida, selecciona Y o N.${end}" ;;
+esac
 
 # deshabilitando configuracion automatica de red
 echo -e "${green}[+]${gray} Parando configuracion automatica de red.${end}"
