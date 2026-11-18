@@ -108,13 +108,15 @@ sudo apt update &>/dev/null
 package_install firefox
 
 # copiar directorios de configuracion
+echo -e "${green}[+]${gray} Clonando repositorio...${end}"
+git clone https://github.com/boltercio/dots -O $HOME/
 echo -e "${green}[+]${gray} Copiando configuraciones.${end}"
 if [ ! -d $HOME/.config ]; then
     mkdir $HOME/.config
 fi
-cp -r config/* $HOME/.config/
-cp -r local/* $HOME/.local/
-cp -r home/.* $HOME/
+cp -r $HOME/dots/config/* $HOME/.config/
+cp -r $HOME/dots/local/* $HOME/.local/
+cp -r $HOME/dots/home/.* $HOME/
 xdg-user-dirs-update &>/dev/null
 
 # Instalando fuentes
