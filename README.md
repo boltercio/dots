@@ -5,7 +5,6 @@ curl -LO https://raw.githubusercontent.com/boltercio/dots/refs/heads/main/autobs
 chmod +x ct-platform.sh
 ./ct-platform.sh
 ```
-https://raw.githubusercontent.com/boltercio/dots/refs/heads/main/autobspwm.sh
 
 Instalacion en contedor 
 
